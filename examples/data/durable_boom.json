@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "steps": [
+    {"step_id": "left", "tool": "boom", "reads": ["left_in"], "writes": ["left_out"], "config": {}}
+  ]
+}

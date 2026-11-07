@@ -1,0 +1,2196 @@
+{
+  "schema": "rewindagent.handoff_manifest",
+  "round": "20261107T224828-JST",
+  "engineering_status": "READY",
+  "git_status": "VERIFIED",
+  "delivery_status": "NOT_PUSHED",
+  "snapshot_stage": "Pre-commit reviewed snapshot; final commit/remote SHA and push status belong to the external post-push receipt.",
+  "research_conclusion": "engineering_packaging",
+  "phase3_started": false,
+  "license_status": "owner_selected_GPL-3.0-only",
+  "license_source": "https://www.gnu.org/licenses/gpl-3.0.txt",
+  "license_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+  "prior_manifest_sha256": "765116ff0a26fa5984455f4595e2d17f1c3b3fdebfa7233eb7aa9028228cda26",
+  "prior_manifest_path": "results/codex-handoff/20261107T224828-JST/prior/handoff-manifest.json",
+  "change_basis": [
+    "Owner authorized new public drkiyira-dev/Rewind-Agent, main, initialization, GPL-3.0 and reviewed project files only; all raw evidence/artifacts/logs stay local.",
+    "Fixed subprocess ownership/reaping/pipe cleanup and SQLite exception cleanup; preserved SIGKILL boundaries and safety assertions.",
+    "Separated explicit original-evidence audit from portable functionality tests; removed historical-output rewrite paths.",
+    "Corrected P2 keyed-row terminology; directly verified non-idempotent duplicate POST behavior."
+  ],
+  "self_hash": "not_included",
+  "self_entry": {
+    "path": "artifacts/handoff-manifest.json",
+    "upload_class": "include",
+    "purpose": "Reviewed delivery manifest",
+    "classification_reason": "Owner authorized machine-readable manifest; self hash/size intentionally omitted to avoid self-reference."
+  },
+  "git": {
+    "repository_root": ".",
+    "initial_state": "No Git repository in directory or parents; no prior index, HEAD, branches, remotes or reachable history.",
+    "target": "drkiyira-dev/Rewind-Agent",
+    "requested_visibility": "public",
+    "branch": "main",
+    "author": "drkiyira-dev",
+    "author_email": "289399102+drkiyira-dev@users.noreply.github.com",
+    "git_version": "2.54.0 (Apple Git-157)",
+    "system_git_status": "exit 69; used already installed Xcode Git explicitly; no license/system settings changed",
+    "active_hooks": 0,
+    "configured_filters": 0,
+    "github_workflows": 0,
+    "prior_history_scan": "not applicable: new repository; all first-commit blobs must be checked before push"
+  },
+  "verification": {
+    "platform": {
+      "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "python": "3.14.3 (main, Feb  3 2026, 15:32:20) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "sqlite": "3.53.4"
+    },
+    "initial_manifest_entries_matched": 71,
+    "initial_drift": [],
+    "source_sha256": "6208288f2fae720254929f81825cdc1b89358cdc79102215e9613c353ae1a3ad",
+    "source_digest_definition": "sorted relative path UTF-8 + NUL + content + NUL; manifest excluded",
+    "runtime_sha256": "9f7c7aa5022856410288a128cc25f1eec41d7d573907c44e32901d971d34b6da",
+    "baseline": {
+      "tests": 80,
+      "loopback_permission_failures_in_sandbox": 14,
+      "outside_sandbox_failures": 1,
+      "resource_warning_lines": 78,
+      "failure_reason": "test released response before SIGKILL; fixed injection ordering at existing E4 boundary"
+    },
+    "final_workspace_suite": {
+      "tests_run": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0
+    },
+    "final_workspace_children": 149,
+    "final_candidate_suite": {
+      "tests_run": 82,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0
+    },
+    "final_candidate_children": 149,
+    "lifecycle_failures": [],
+    "resource_warnings_in_final_logs_or_child_stderr": 0,
+    "historical_audit": {
+      "tests": 3,
+      "returncode": 0,
+      "scope": "Local original evidence only, explicitly run via tests.history_audit; absent from public repository."
+    },
+    "demo_eval_round2_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "conclusion": "engineering_packaging",
+    "old_eval_differences": "timings, planner_used/published additions and 92 non-B4 closure diagnostic differences; never described as timing-only",
+    "frozen_hashes_unchanged": 7,
+    "old_finalization_files_unchanged": 16,
+    "p2_direct_duplicate": {
+      "profile": "P2",
+      "idempotent": false,
+      "query": true,
+      "posts": 2,
+      "effects": 2,
+      "keyed_effect_rows": 2,
+      "effects_key_unique_index": false
+    },
+    "p2_inflight": {
+      "initial_status": "unknown",
+      "initial_published": false,
+      "final_published": true,
+      "final_effects": 1,
+      "posts": 1
+    },
+    "build": {
+      "build": "1.6.1",
+      "setuptools": "84.2.1",
+      "packaging": "26.3",
+      "pyproject_hooks": "1.3.3",
+      "tool_install_source": "Official PyPI was allowed; logs show cached wheels.",
+      "build_mode": "--no-isolation, preinstalled tools, PIP_NO_INDEX=1",
+      "empty_cache_offline_build": "not verified",
+      "artifacts": [
+        {
+          "archive": "results/codex-handoff/20261107T224828-JST/delivery-dist/rewindagent-0.1.0-py3-none-any.whl",
+          "sha256": "4b2aa6fc1b7328c24e7c8d313aa1e0da79d2367ec747a318e94e8fcc9833b006",
+          "size": 68597
+        },
+        {
+          "archive": "results/codex-handoff/20261107T224828-JST/delivery-dist/rewindagent-0.1.0.tar.gz",
+          "sha256": "d45f6954989406a0898d8a2d4babc6ad7d37d5cc471016d6e0e55732c8890d08",
+          "size": 120632
+        },
+        {
+          "archive": "results/codex-handoff/20261107T224828-JST/delivery-wheel-from-sdist/rewindagent-0.1.0-py3-none-any.whl",
+          "sha256": "ef827476c2b25554216663bd814aafb81a4884c5903edf3c841e73da1ee851cb",
+          "size": 68597,
+          "installed": true
+        }
+      ],
+      "wheel_member_content_identical": true,
+      "wheel_archive_byte_identical": false,
+      "sdist_required_files_complete": true
+    },
+    "archive_scan": {
+      "wheel_files": 24,
+      "sdist_files": 59,
+      "names_and_full_contents": true,
+      "unsafe_paths_or_links": 0,
+      "sensitive_findings": 0,
+      "limitation": "Finite pattern/content review; no guarantee of zero secrets."
+    },
+    "installed": {
+      "flows": 7,
+      "children": 18,
+      "all_reaped": true,
+      "from_site_packages": true,
+      "source_PYTHONPATH": false,
+      "pip_options": [
+        "--no-index",
+        "--no-deps",
+        "--disable-pip-version-check"
+      ],
+      "actual_wheel_sha256": "ef827476c2b25554216663bd814aafb81a4884c5903edf3c841e73da1ee851cb"
+    },
+    "readme_public_commands": {
+      "returncode": 0,
+      "history_audit_block": "Run separately in owner workspace; not falsely claimed in clean repository."
+    },
+    "candidate_file_count": 54,
+    "candidate_scan_findings": 0,
+    "actual_model_calls": 0,
+    "local_evidence_root": "results/codex-handoff/20261107T224828-JST",
+    "evidence_paths": {
+      "tests": "final-tests/test-summary.json",
+      "candidate": "final-candidate-tests/test-summary.json",
+      "installation": "delivery-installed/install-flows.json",
+      "archives": "delivery-archive-scan.json",
+      "history": "historical-comparison.json",
+      "frozen": "frozen-final-check.json",
+      "readme": "readme-check.json"
+    }
+  },
+  "rules": [
+    {
+      "pattern": ".git/",
+      "upload_class": "exclude",
+      "purpose": "Git metadata; never a source tree member"
+    },
+    {
+      "pattern": "results/",
+      "upload_class": "local_only",
+      "purpose": "Owner-selected local evidence and build/log retention"
+    },
+    {
+      "pattern": "build/, dist/, *.egg-info/, __pycache__/, *.pyc, .DS_Store",
+      "upload_class": "exclude",
+      "purpose": "Generated files; no deletion implied"
+    },
+    {
+      "pattern": "*.sqlite*, *.lock, *.ready.json, .env, .venv/, venv/",
+      "upload_class": "exclude",
+      "purpose": "Runtime/private files; never staged"
+    }
+  ],
+  "forbidden_operations": [
+    "blanket staging",
+    "force push",
+    "history rewrite",
+    "unrequested branches or tags",
+    "package/Release publication",
+    "deployment",
+    "phase3"
+  ],
+  "files": [
+    {
+      "path": ".DS_Store",
+      "size": 6148,
+      "sha256": "16fce8b741b8f5b675fd521e3890c7f836452cff1a5d04ce073a2d32340b4c1c",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": ".gitignore",
+      "size": 191,
+      "sha256": "2ee44808f85faaabbd86739892fdf007ecef1ec5fca13757bd7da32518d1a3d7",
+      "purpose": "ignore hints; not an upload whitelist",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "LICENSE",
+      "size": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "purpose": "project license or portable test support",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "MANIFEST.in",
+      "size": 520,
+      "sha256": "feb86b03ef7a184924fc42a2fc77fcfc1dad30007fe02165f42c5a85ca8704c3",
+      "purpose": "sdist file list",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "NOTICE.md",
+      "size": 1353,
+      "sha256": "7ffc54c508a4115aa804a1756566c9b8190ecf5d1b2a747e2f5ec29c2ec6c67d",
+      "purpose": "third-party notice; license not selected",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "README.md",
+      "size": 8953,
+      "sha256": "3a720465e709d25f07e06417fe8b74cd8f69ce8b6fb097c8e66e503a34bceb80",
+      "purpose": "project readme",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "build/lib/rewindagent/__init__.py",
+      "size": 105,
+      "sha256": "4e922e62e67e2f650f55eb419109958c17a7bd3a2e2041174ac6aac21e572ff8",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/__main__.py",
+      "size": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/api.py",
+      "size": 21750,
+      "sha256": "a2750eb3458532e16a0bb208a3be44e7a8c2b8b8901221c0fee19ce464d3edc0",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/canonical.py",
+      "size": 1045,
+      "sha256": "5d1dd7f66be9c7ed4c8431f57939bb706efbad5a3c6e85f03ea4850614795046",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/cases.py",
+      "size": 9236,
+      "sha256": "c11255a61f662e6b5f9349e333a5ac19c169246a18e98054516f2dcdd22c5e9e",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/cli.py",
+      "size": 8271,
+      "sha256": "9a184075c08d85a8a2d412a8e091aa968a81aedcec0e55f064a3dbfd23eb6a41",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/diagnose.py",
+      "size": 2525,
+      "sha256": "c3451eee08ca761c6df0680a4f8704cf201741ace5a2924853c729c3616ed692",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/durable.py",
+      "size": 41313,
+      "sha256": "eed47c0b7067988d9fce7f1505fe1aca87e127b4c01024f4167dbbd74ea3955c",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/effectflow.py",
+      "size": 14303,
+      "sha256": "6bc8a9bb58078d69e97d28e19e3890c7d2608d46f27311b663851e452392f22b",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/effects.py",
+      "size": 17127,
+      "sha256": "4ada0a7752814a41efb347ad3347851b7ca8e2bca2a7a5dbd0cc4cdc330573d1",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/effectsvc.py",
+      "size": 12002,
+      "sha256": "c9c4b14d559b72b69286cd1fe297833b2e64c6bcad928f95e8fb8a709efdb54d",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/engine.py",
+      "size": 27690,
+      "sha256": "0e2ea75eea60adfd63020eca3b4ff6ea9f38ab9cfd33de69b023c84562126389",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/evaluate.py",
+      "size": 8238,
+      "sha256": "9351ee171269de753115ec844d9d6fdf4fcc2599adc1df1d46122affc5c63d53",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/model.py",
+      "size": 6622,
+      "sha256": "edc4d56a15a336550ee32cd890c1fb7cfe2654eff2bf906bb2756ac5885f3151",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/reference.py",
+      "size": 641,
+      "sha256": "ed52ba4f70485f732d6a176c6cfe25e889287dcf961648a159f56a533977fd4c",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/round2.py",
+      "size": 8033,
+      "sha256": "25580fc63cbc31c368aab5c0cde495367c804e8a71a6e3383a326166a35b065e",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "build/lib/rewindagent/verify.py",
+      "size": 2653,
+      "sha256": "158bdc101094e40b5f8676b8ad57bdc52a30cdc49643dac25031c1fd24d2f6a8",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "docs/CODEX_HANDOFF.md",
+      "size": 8546,
+      "sha256": "bfe44374528431a04ff36010da86ce1bd46fecda8ac67f2b15e1512cfa5c9e6b",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/api.md",
+      "size": 4166,
+      "sha256": "166faf346f93395c072c0b4fd17a7f181dab27566b32f0330654b51959e413a7",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/evaluation-plan.md",
+      "size": 5959,
+      "sha256": "918db0d769585e2cb2b2749f57962745d01252f10f2fdee8c8fee0357a39ed2c",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/phase2a-contract.md",
+      "size": 6915,
+      "sha256": "796082586b9fc17f4d4316f45d6e704f473f5e04319b937bb3c620b30f912176",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/phase2b-contract.md",
+      "size": 7353,
+      "sha256": "0005d5383f81a7c8169e5bd3382d756f0524f8a81d4cad20d17fbfb79a29f575",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/recovery-contract.md",
+      "size": 7641,
+      "sha256": "f15f2dab0b46634cec3042466fc7e0502412610102f79a57943748c9e25b4737",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/review.md",
+      "size": 14352,
+      "sha256": "fff3ecbba74f7c8780dfd9148c42e5ae87a24f65005f49ad7806fdacdfde46de",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "docs/round2-expectations.md",
+      "size": 7022,
+      "sha256": "f5cc4cb3184e2c575078bdcf67c4617fbd15c24b5cfd9050f849329b8ed83441",
+      "purpose": "contracts and handoff",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/__pycache__/durable_run.cpython-314.pyc",
+      "size": 7047,
+      "sha256": "78daac5cb5db682f1abac0c587e8dcac333a4e736fc623f51e4a86afca9fda59",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "examples/branch_recover.py",
+      "size": 4046,
+      "sha256": "c161531f0548a797122b3a54e3158127dfe1a12c18b9c891342607ac23d258cd",
+      "purpose": "caller examples",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/durable_boom.json",
+      "size": 144,
+      "sha256": "ebaabe9d5e0aa49289ff6c18344fc7ae1cd327151ef37156e0da2a5708bb397d",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/durable_effect.json",
+      "size": 150,
+      "sha256": "eb2dc926422c2a4b06e53f58295c24d67383aeebb4ec61ebc09360acabc37e9c",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/durable_snapshot_alt.json",
+      "size": 30,
+      "sha256": "fd2a03970cbd55dcc89db9bc451512af99849f5bc5b136d3425e2b962111aa98",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/durable_workflow.json",
+      "size": 357,
+      "sha256": "a8fc381f3dd1a98699b26028c8776d79a9d28776db7e627bc1f50e9d55da78ff",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/durable_workflow_alt.json",
+      "size": 359,
+      "sha256": "b98798bad4981c3af2b545e7edfd58644d9614ee56d4e4c490e981ba04a08cda",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/effect_snapshot.json",
+      "size": 9,
+      "sha256": "c1a75f24b4d3ec8ec85ef9c26ab5262c89cf094faa3a7ba27ec60372b41d42e2",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/effect_workflow.json",
+      "size": 372,
+      "sha256": "05e63a4f58c17b8f464515523d8ca05fd7195d8d91860b92b78d870cc4ece247",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/data/snapshot.json",
+      "size": 30,
+      "sha256": "aff536e0806213bd931dab541fa8fe020d2093742c89d608954a6bcdc128dae5",
+      "purpose": "synthetic workflow fixtures",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/durable_run.py",
+      "size": 3784,
+      "sha256": "69b467686c2c2ae224a8376c174391ec90f144737b067d15bc34d3107569a564",
+      "purpose": "caller examples",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "examples/effect_run.py",
+      "size": 3176,
+      "sha256": "3057bc2a7ed60df1f2760a10407584251427aa9ea49c577aa3a5f4a88046e5d9",
+      "purpose": "caller examples",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 435,
+      "sha256": "6b9b22c165489cc3482b6ae59a544fa9cd4cb93152c38ffaa5a0c17ea9352cc8",
+      "purpose": "package metadata, version 0.1.0, no license field",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/affected/children-stderr.json",
+      "size": 100200,
+      "sha256": "6db0e7d1d9665c5fecb5248611d3c63daf6dd9755d4ce51503e16542c218f485",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/affected/rewind-tests-12xnp0e0/acceptance.json",
+      "size": 4184,
+      "sha256": "eebc460bb1e77939a3da0e85a937a3fb4b5f30eb45b9af63e638053957051a14",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/affected/rewind-tests-12xnp0e0/phase2a-crash-results.json",
+      "size": 3726,
+      "sha256": "681b41d6d673f0781d7e3f52a188692d26d3e82e45cc29ab40c059ef792c74da",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/affected/rewind-tests-12xnp0e0/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "039aeb4a1b0d5740d7d10858047749a048a4f13257286d8a4052560cc38b2059",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/affected/test-summary.json",
+      "size": 23664,
+      "sha256": "8c7fa5c8ef7822899892a321684280ec27d185eb3a45e5dd4b4eb6830b54922b",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/archive-scan.json",
+      "size": 19872,
+      "sha256": "85276de283e87b21ba229437799cd560c0d098a2c157f08b539e08b58fae5dcc",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/baseline-finalization/acceptance.json",
+      "size": 342,
+      "sha256": "8d1ba59ce32cccdfcf13af324c2d429a66e62567b42a32ff97eb692795f1769e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/baseline-loopback/baseline-finalization/acceptance.json",
+      "size": 2634,
+      "sha256": "b9c4e4cf0fbaf535e39d2ec6abe62db557f77b4a08ea64888d877d3e2dbca7cb",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/baseline-loopback/baseline-summary.json",
+      "size": 140,
+      "sha256": "b2c51c1f7cf02640cb64c7ece42558e7962fdbdc9cdd34c62a08432e2b23418e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/baseline-summary.json",
+      "size": 141,
+      "sha256": "4e98fff02daf77552a2eff5e8d547665e0818f41d2b0bc83f833e54facae883e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/build-environment.json",
+      "size": 267,
+      "sha256": "78cdc729cf12227d05c8b8d081c197bf9eef43f0be2f6aca14ec527b209e0560",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/build-source-command.json",
+      "size": 528,
+      "sha256": "3bb31444d2c85d59802a7d7aa6e2443ef30f83797f96e60620d8e945d93e5fe4",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-paths.json",
+      "size": 1562,
+      "sha256": "5dbfadeb19c3990caa70b90033a4e99b8d86774582b756aa87970bb034f2de8d",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-scan.json",
+      "size": 850,
+      "sha256": "b3e2e63a21159350dad17b4fa13c3c5f6ce11c86799bb3fd99460c3aed2f5554",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-tests/children-stderr.json",
+      "size": 100018,
+      "sha256": "4499fac63de4341736367e29c85da3ea1267d19fe2961dc69b92f846d39f5ef2",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-tests/rewind-tests-thsee1gk/acceptance.json",
+      "size": 4184,
+      "sha256": "40a4591760d5294d8dd58918504cd949407398dec93c1a6139bc0700eb70cfa6",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-tests/rewind-tests-thsee1gk/phase2a-crash-results.json",
+      "size": 3778,
+      "sha256": "a9fc21ed167daa64ac11e141f5450c178f8926349b1dddd7b5099e2733286b2e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-tests/rewind-tests-thsee1gk/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "b44955e0c39542b21b71210b659a0a9ff013b8efb0be3db4c616f0d7ad8dce28",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/candidate-tests/test-summary.json",
+      "size": 103241,
+      "sha256": "2dc1af6ec80494427ee7e7cc2f8f6f60c15433d135979ed3c26ea3c1307fb8c9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-archive-scan.json",
+      "size": 19557,
+      "sha256": "96d2e8f5f7b9a38fa60319b51266f7cd4f2ec15c7f5b1a26c017ad6a0f8acba3",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-build.json",
+      "size": 265,
+      "sha256": "56d3c50e50a5b768d4b9258487b61824cb279ba0dce55e1020e04ce36ddc9926",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "4b2aa6fc1b7328c24e7c8d313aa1e0da79d2367ec747a318e94e8fcc9833b006",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-dist/rewindagent-0.1.0.tar.gz",
+      "size": 120632,
+      "sha256": "d45f6954989406a0898d8a2d4babc6ad7d37d5cc471016d6e0e55732c8890d08",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-installed/environment.json",
+      "size": 575,
+      "sha256": "870ea364ef046ef6bcf4014e33661cc4f490eda460c66e0cb4dd06e5ce4154e6",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-installed/flows.log",
+      "size": 199,
+      "sha256": "1e19aaaba6058209f44b5aa1c1399225a93825c155afa894cc72b5cffc5ec599",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-installed/install-flows.json",
+      "size": 48654,
+      "sha256": "5da11472c049f9fe54ec8c49deb97fdfc2e98b999a05b3ddd036efd99cd2078c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-installed/pip-install.txt",
+      "size": 477,
+      "sha256": "795d3e1564cbf13e536227d6a6be9372f2a9767aa8e57d6e68deea325106f4fe",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/delivery-wheel-from-sdist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "ef827476c2b25554216663bd814aafb81a4884c5903edf3c841e73da1ee851cb",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "d7f11ec6f6d74b215f77bebfb82326a0c6c7a5146a745788299f40b4b7927b88",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/dist/rewindagent-0.1.0.tar.gz",
+      "size": 120577,
+      "sha256": "f5b62e099155da5d930b52f99b66dd7c806db23f1fe65b6f3d81cc8aba6b91d4",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-archive-scan.json",
+      "size": 19548,
+      "sha256": "c8ff76f73fb01c8c5c0585fbcdcb67cbb349d6ef892b8208a9ce91b545037d7c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-build-sdist-command.json",
+      "size": 426,
+      "sha256": "6c150a3bb41367c44e085cd0be3c4c54f9a20968bb4bd30acbeac8107bd15dab",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-build-source-command.json",
+      "size": 500,
+      "sha256": "1f4f4fa3c5a5f1d61f7f4180423eaf60841130b9ad0a34ab9bd1e515b0eeed2a",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-candidate-tests/children-stderr.json",
+      "size": 100018,
+      "sha256": "02690718ae561b6a45b2ea8ca010f39d0c9398b967d12fac841ac0329c788f41",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-candidate-tests/rewind-tests-v4mj3g1y/acceptance.json",
+      "size": 4184,
+      "sha256": "b311aaea3eb232534a3bde10f7f201886be353c12631aaa368fcf98ad6556bfa",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-candidate-tests/rewind-tests-v4mj3g1y/phase2a-crash-results.json",
+      "size": 3778,
+      "sha256": "14c5a35ae9d16b5dce6827d4d2c6476ee861c242d99cd61578f8631243800f91",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-candidate-tests/rewind-tests-v4mj3g1y/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "766cc7396f4e861f89ea7b688532f2cebf1b5266d0193229b6781022cae9af13",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-candidate-tests/test-summary.json",
+      "size": 103241,
+      "sha256": "c8b75bf80603eac7e25b15a8cbc2ea8a09cb7b2cd02da6b9f58d6d1ae2d4b3b7",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "276ca3530e192d3065fa2aed7bfcf09cab413ebb11062fcc6a3c1490690eb803",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-dist/rewindagent-0.1.0.tar.gz",
+      "size": 120609,
+      "sha256": "331f4edf0fffaf5b59f86dc5ee26e49bad36d23714d577006da1223253a21568",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-tests/children-stderr.json",
+      "size": 100018,
+      "sha256": "1f7aebba316b7e05f116dfd5d934f5ccfed746e2ae3f2e8ad7f890e30da7db9a",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-tests/rewind-tests-jid4765f/acceptance.json",
+      "size": 4184,
+      "sha256": "1904c9f60f2f53b4a523383cc4ae8b31e2386ab318c13fc82fdd2b4f3a045141",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-tests/rewind-tests-jid4765f/phase2a-crash-results.json",
+      "size": 3726,
+      "sha256": "92ed879a1a923879a0d27692ec3e1843196e74add405fb4f30c984416741ef01",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-tests/rewind-tests-jid4765f/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "d4a77a8ae80012d23eafdced66483dd06e51e27e14a519c090984069afc36694",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-tests/test-summary.json",
+      "size": 93101,
+      "sha256": "e0adb430bea95e9afeb01a4e6e1f5b134d9a758c46bcb0bef24606d48ac5e55c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/final-wheel-from-sdist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "90d8cbc6fc7702cff088243f4129b73e2d6e709c03accc241f2fb0d092623489",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/frozen-final-check.json",
+      "size": 1769,
+      "sha256": "0f6a6f3f2a83e794e6da239a7ff5a9779c93794319830d6d27edf58ac991fb3e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/git-automatic-actions.json",
+      "size": 3603,
+      "sha256": "55c73cbe52151e40dffec2b2d7a5cc57c81850530f934858d898a5b9d2a17f16",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/git-initialized.json",
+      "size": 1338,
+      "sha256": "cd4c76ff816e30b94f6517f8bdff757a6169a40bdbb6b4d35b24f5524bb8e1af",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/git-inspection.json",
+      "size": 1201,
+      "sha256": "f1376762824cea25dea79bcd1bf4620ebe2e13da12a9bf1d06810487f4946175",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/historical-comparison.json",
+      "size": 36975,
+      "sha256": "5ee09f5bd32b742d029784f424b0e981bcbebcf34a8be26d3c07e059be5d063a",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/initial-audit.json",
+      "size": 18077,
+      "sha256": "77605f8b7de020b196621345adce99f2b74882943821f9f72f8af0e2cdf81308",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/install-environment.json",
+      "size": 560,
+      "sha256": "21bc7f5a2433cb7ace93856378351001a63875b43cd7bf3052acaf95fdd47be9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/install-flows-attempt1.json",
+      "size": 21910,
+      "sha256": "425e9479d2164b0d355838dd57ac24017735ad1c2d06ce166c9ea31ffbf37491",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/install-flows.json",
+      "size": 48597,
+      "sha256": "77d571d12b366072b2142dcd85f10977778e41332c940956e4ec772e0381c3d2",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/installed-final/environment.json",
+      "size": 566,
+      "sha256": "00bc0f675efa78ad77f1540c7e2d17190c97feb6e2018f0ec2f41c30cd79a6a6",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/installed-final/flows.log",
+      "size": 196,
+      "sha256": "11733294f8fb6b30bcef139819e89ba10fa81cb6b6bc90e96209594c9cd13522",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/installed-final/install-flows.json",
+      "size": 48597,
+      "sha256": "34335a136a7ab4b20984f2a7d7b37424b9cb9cfa4c8c58b7b2688ea4a441b087",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/installed-final/pip-install.txt",
+      "size": 474,
+      "sha256": "fc4c9e29876efb5fff3726ff55d470be8cb07db8d1ff282f2a2e6f86cb2ba2ef",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/affected-unittest.txt",
+      "size": 5239,
+      "sha256": "42105ed8cda4c94c83873584f16e36bd5734465a92f82bd32cfc7b3265e55426",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/baseline-loopback-unittest.txt",
+      "size": 153978,
+      "sha256": "edad0a715aa676527f7326f348be9232ba504ffe63b1baa0afe90b3e7dacc8b5",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/baseline-unittest.txt",
+      "size": 83338,
+      "sha256": "28cca8d1109e77c1eebb5536b0f9d446f4d3d0d2c69eebaa9c5d4b64556f6801",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/build-source.txt",
+      "size": 14391,
+      "sha256": "dc734457d13c85a720e35ff8ecb52529b6b29ec1680bc4a76dd19e51efb22f40",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/build-tools-install.txt",
+      "size": 771,
+      "sha256": "c01d4c40ec3bd419b4defa3f4f21aecc573763cacf579a8685daf6ff9a7bcdb9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/candidate-unittest.txt",
+      "size": 11569,
+      "sha256": "da783db096b730f8f934746cce8752905a758eb490fe302d060bd70219efacea",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/delivery-build-from-sdist.txt",
+      "size": 7230,
+      "sha256": "c562e4cee34320fc8d6235f69c6a45ea9acd98fe5812b246a5d3dbe15da46f24",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/delivery-build-source.txt",
+      "size": 13304,
+      "sha256": "1a63d3c074aefe3f3ad63e42cc171204e0f687a7555650608620dae3e3b66376",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/delivery-history-audit.txt",
+      "size": 497,
+      "sha256": "78f33661e1f216ed2b41b0ad7e6f6b67b03fc1333480c4a92cfa46086ddd0807",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/demo.txt",
+      "size": 532,
+      "sha256": "3c847a19c67445c2dc0f1dfccf40df6a77ab84f28bfead8b49e2a954975d0037",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/eval.txt",
+      "size": 186,
+      "sha256": "f940ae5e1c874878fd8dd77ffb03686af82884a28cd751664321af2c2b5f2d08",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/final-build-from-sdist.txt",
+      "size": 7227,
+      "sha256": "3cf2bc658160178d01ffdf425d7c5b853eb22dcbbfdd07cff02ac017ac49d019",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/final-build-source.txt",
+      "size": 13301,
+      "sha256": "d25194884bcefed2b9437d4d4c910b7a0fff079751b98d440fa26c0828a1ba2f",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/final-candidate-unittest.txt",
+      "size": 11569,
+      "sha256": "79b6c871717c65cba103e97de5fa6a87f1eae2fcfbfecd8ed4fc80300d02eec0",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/final-unittest.txt",
+      "size": 11517,
+      "sha256": "98f01ea2c5279749934a1b655c0e41f67986ae60837a28f5fdf2fd3fa4342349",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/history-audit.txt",
+      "size": 497,
+      "sha256": "78f33661e1f216ed2b41b0ad7e6f6b67b03fc1333480c4a92cfa46086ddd0807",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/installed-flows-attempt1.txt",
+      "size": 977,
+      "sha256": "2dbf386a89c1e16b50663dcf3b2c9fc20357c7d486f6e3c4dce0be97ef08bad2",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/installed-flows.txt",
+      "size": 196,
+      "sha256": "270898ef9add91185cfe74e0536636eaea23d03427365b2a95abf0d34e50d857",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/pip-install.txt",
+      "size": 468,
+      "sha256": "9e6272f53c524333d0440bcc31e744a87059822961ed57df6c5d5c722bf31718",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/readme-commands.txt",
+      "size": 38636,
+      "sha256": "24d9a20a243b1dba928786832668c7161f50823135a4bba40e83b68d65f3f8e9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/round2.txt",
+      "size": 204,
+      "sha256": "eb747f1125f672cdfa98bcc75920b8250e885c625762f9bc488c80aee11a7a70",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/wheel-from-sdist.txt",
+      "size": 7221,
+      "sha256": "9b70de8af3278a30f26ae652809536ed653e750c31c545ef9bb488f336049848",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/logs/wheel-source.txt",
+      "size": 7217,
+      "sha256": "a24eaa5b3276d1f0327bfda359abc02fdd8fa416b69b56bbc4b8da6256f58cba",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/.gitignore",
+      "size": 153,
+      "sha256": "5a9fcc9187bab15c94fec72561cc0695dd22007bc636a2e77ee33bbe38960723",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/CODEX_HANDOFF.md",
+      "size": 14486,
+      "sha256": "92778bf19c80a3faf8b03a3711632c2fdab74d287ae705ad2557481cabfba5e9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/MANIFEST.in",
+      "size": 378,
+      "sha256": "7710c85d28d63ce1c5b789bbabecc56b6e5c00c1704b25047ed724350cdfa364",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/README.md",
+      "size": 13205,
+      "sha256": "6afdc2b503f3685ea8b7cc35c5433df708603e390ef9c8ecb344536fdf88d5c9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/CODEX_HANDOFF.md",
+      "size": 14486,
+      "sha256": "92778bf19c80a3faf8b03a3711632c2fdab74d287ae705ad2557481cabfba5e9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/api.md",
+      "size": 4166,
+      "sha256": "166faf346f93395c072c0b4fd17a7f181dab27566b32f0330654b51959e413a7",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/evaluation-plan.md",
+      "size": 5959,
+      "sha256": "918db0d769585e2cb2b2749f57962745d01252f10f2fdee8c8fee0357a39ed2c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/phase2a-contract.md",
+      "size": 6915,
+      "sha256": "796082586b9fc17f4d4316f45d6e704f473f5e04319b937bb3c620b30f912176",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/phase2b-contract.md",
+      "size": 6593,
+      "sha256": "f96c92f34da4e68f5acba3651c729b95bb96b41c5872981ac2ca7b8617f1bbce",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/recovery-contract.md",
+      "size": 7641,
+      "sha256": "f15f2dab0b46634cec3042466fc7e0502412610102f79a57943748c9e25b4737",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/review.md",
+      "size": 14352,
+      "sha256": "fff3ecbba74f7c8780dfd9148c42e5ae87a24f65005f49ad7806fdacdfde46de",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/docs/round2-expectations.md",
+      "size": 7022,
+      "sha256": "f5cc4cb3184e2c575078bdcf67c4617fbd15c24b5cfd9050f849329b8ed83441",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/handoff-manifest.json",
+      "size": 19517,
+      "sha256": "765116ff0a26fa5984455f4595e2d17f1c3b3fdebfa7233eb7aa9028228cda26",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/pyproject.toml",
+      "size": 369,
+      "sha256": "cfbd6ebf733c82a9149aea8b0bf45fdf80eda16a4a1cf1d064eb041c4f3d94b0",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/rewindagent/durable.py",
+      "size": 41480,
+      "sha256": "99b51ffd350389573632d49c6b10f8511e5a961054395fa4ab8f6eb97ad6cf22",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_durable_crash.py",
+      "size": 23498,
+      "sha256": "6bb63f7e272aa89fae4df3e91a8b479682754e16031439893cb1bde90f1cdd98",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_effect_crash.py",
+      "size": 31193,
+      "sha256": "89ec313f851c0d6d8ef25f09924131dea3492b9f0af03caed1e138189e85908d",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_finalization.py",
+      "size": 19196,
+      "sha256": "9aeb4faa2a76dcca6dd96f2f260358e1358538ceb9c5d559545e46bf159ef834",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_properties.py",
+      "size": 6719,
+      "sha256": "8a4c34e3e991f71a4ac71db658227c892dc7101f8c5c2a25878a6dfe655a89a8",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_public_api.py",
+      "size": 15542,
+      "sha256": "16022b9845716fea61ca592fb5177698addbc2d43e515a56245769be7923a184",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_round2.py",
+      "size": 10979,
+      "sha256": "1b72f3f5822fe43a89dbfe73e50aa92641706e9c0d25fb62dc5fc4d1545c6a3c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/prior/tests/test_targeted.py",
+      "size": 18101,
+      "sha256": "4f0c02c631225c757db181ce95af11f577b313a46941e05bbc8f1d953b2b5f75",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/readme-check.json",
+      "size": 320,
+      "sha256": "0bc6f42fe411a6c8d7530555f5de46c5e91afcd02faff25bc08854a004ac283f",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/readme-commands.sh",
+      "size": 2810,
+      "sha256": "584bf35c6b843a9329c7a5dc90e00f2082604705052e4cd52315c29aca1dee90",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rerun-commands.json",
+      "size": 870,
+      "sha256": "8fe0e6d90f1595f40708c869030eea3f508f95b761b512108340dec57a3744d9",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rerun/eval.json",
+      "size": 269304,
+      "sha256": "353731553d6df562365894356b9a71d4383d1ce64fe5233f30afa40555b8e6d6",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rerun/round2.json",
+      "size": 238623,
+      "sha256": "32b2f4c0c5b2c2c653b448d9d79af5919c79eef77264e2b8462c38987e2711e0",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rewind-audit-tests.py",
+      "size": 2747,
+      "sha256": "c648ba33495d625d0844c53de95ea919936a8a08531766be3cd03449a44b7c94",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rewind-baseline-runner.py",
+      "size": 1654,
+      "sha256": "898f64fa6c4f025424da06f7653d31a039e7c30749e52978e7de3716fda38c25",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rewind-final-scan.py",
+      "size": 3293,
+      "sha256": "e1245af394a986e6a3550c4de7934c7e200a6ddc71f38ff3c160f9d87f80e2ba",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rewind-installed-flows.py",
+      "size": 8082,
+      "sha256": "d8d0f4a2960ec2ca804e05adb1981fe6b4b21d4ba81f8d67ec98418335623fd2",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/rewind-scan-archives.py",
+      "size": 3281,
+      "sha256": "9c70f2b63ace8591227ceee4d15a15077c71f72090f6ba4acfe94387a032a69c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/source-snapshot-before-whitespace.json",
+      "size": 8628,
+      "sha256": "27f855d492b3a17e29408705fc391683b597e488bc97521283f80fcfad8f1a58",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/source-snapshot.json",
+      "size": 8628,
+      "sha256": "3d2d9fa3b303ce9c827d4a43358557502569669c47e75d1053fef9f074533fb7",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/wheel-from-sdist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "d6e97e6695b1d68e94fb00f152b3798fa9db2321d35352610b412a7746595f16",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/wheel-rebuilds.json",
+      "size": 1358,
+      "sha256": "f3e4b0e2a94bfb6c4206b6eaf1e7a6aa409647fea1a02adabf29fd8d6adb3dca",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/codex-handoff/20261107T224828-JST/wheel-source/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 68597,
+      "sha256": "dcd84183d18809a600f8ba86df8eaa5bf10179863073ac82375e44aee392c597",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/eval-rerun.json",
+      "size": 263611,
+      "sha256": "6a43d6affb1160a85cf5d4e390f40a68470fdf68ccf47c98191525b98ac074ec",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "results/eval.json",
+      "size": 263616,
+      "sha256": "7f1c2e8462886005c24cb1cf2823386c9c86c180e72e468f5e7eec760a2d68e4",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "results/finalization/20261107-handoff/acceptance.json",
+      "size": 2621,
+      "sha256": "b647c5485c28c7d62d7456ae0bc13c9777ae8f43eb32a05525e6fd16a1d31893",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/build-from-sdist.log",
+      "size": 6404,
+      "sha256": "8c90d429521076fbe88f0265482d712d60b60eac956815d0cb74f01d2b0db57d",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/build-from-source.log",
+      "size": 10749,
+      "sha256": "ed6d93f51d3e72c90134170019cc720320ecd94705e0a42bea3264396894f6a5",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 57754,
+      "sha256": "ce0c07db9b2ffddbe4c4cd94cd29bf66df1f117a9aa753e5501dd0a7c093e559",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/dist/rewindagent-0.1.0.tar.gz",
+      "size": 104386,
+      "sha256": "da35d0ed42cb69bdbc6e854ec09d12041b2d1f7c45a9d4f5f905115f4b1a46e5",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/install-flows.json",
+      "size": 14196,
+      "sha256": "e573409b1514822a2897ef367c54321b5b70dfc5397a3e87fcdcca22a0e4f554",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/build-tools-pip.txt",
+      "size": 597,
+      "sha256": "422b345cf721869e5c5b40d5336bb415d2ac284e22464fbab71df6c501c5e86c",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/demo.txt",
+      "size": 532,
+      "sha256": "3c847a19c67445c2dc0f1dfccf40df6a77ab84f28bfead8b49e2a954975d0037",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/eval.txt",
+      "size": 123,
+      "sha256": "4fa72b9889bc06dc40eee86bedd7053dbcc0e422df7fea2d9abd22524bd9c442",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/git-status.txt",
+      "size": 178,
+      "sha256": "411522ec89779639df259fa9f595942811c505c31bc2eb85696023376304b203",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/phase2a-k3-lock.txt",
+      "size": 107,
+      "sha256": "c9c6783399278c21c773d4c37c37732c3cb5107af24929b494935dd808439671",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/round2.txt",
+      "size": 141,
+      "sha256": "7542e084b3e3a5ecd3dfaa2cf82e372ffe526e6443a9831758b435a55ccc248f",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/logs/unittest.txt",
+      "size": 18120,
+      "sha256": "e100a4581b8abfb0b96b8c23e457fa75c78eb2426a8b0287398281287ab32925",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/pip-install.log",
+      "size": 159,
+      "sha256": "282cb7a0cdbd5ca645b5b3e56c7c56145c4657fea7707adfd57fbe025f110be2",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/rerun/eval.json",
+      "size": 269304,
+      "sha256": "1ef4095494b4511d4fb0081cc8c2a2ac19aabd90ae460d123e879f195eed5da8",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/finalization/20261107-handoff/rerun/round2.json",
+      "size": 238626,
+      "sha256": "592458c275a2b3b4e2b024c171071023458db18b319e584e1b5e6e857debc545",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package."
+    },
+    {
+      "path": "results/phase2a/pure-crash/crash-results.json",
+      "size": 3759,
+      "sha256": "7373b9ed7265085a9b58b54132e50c8916f9137c99024de9048d02c655bf793e",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Frozen original contains an absolute private workspace path; preserve bytes and keep local."
+    },
+    {
+      "path": "results/phase2a/pure-crash/installed-k3.json",
+      "size": 564,
+      "sha256": "c143b7e727c5bd2f205d3aee01b85070aede0fd50369a5bcb48391a864ed95bd",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "results/phase2b/effect-crash/crash-results.json",
+      "size": 1402,
+      "sha256": "9741b8de87c02858e4871d6db4e03fa79ff659bc7d7e373356523ad6dc81afff",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "results/phase2b/effect-crash/installed.json",
+      "size": 639,
+      "sha256": "f93c5583e9cae7d3b665e461011c226640584aed6c8a3750f68452068581f443",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "results/round2.json",
+      "size": 238622,
+      "sha256": "b6b8d91a2b7b1f6fd56394ff8a9d311ba9c96fb965472d00cd76bc98f82f60fa",
+      "purpose": "Local audit evidence, original material, validation script, build artifact or log",
+      "upload_class": "local_only",
+      "classification_reason": "Owner explicitly keeps raw evidence, artifacts and full logs local; not part of repository or package.",
+      "prior_upload_class": "decision_required"
+    },
+    {
+      "path": "rewindagent.egg-info/PKG-INFO",
+      "size": 13429,
+      "sha256": "8ba87e524eaf5acc681e1031964d4e9cac50b25e67473fe668935986e10ba292",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent.egg-info/SOURCES.txt",
+      "size": 1298,
+      "sha256": "82bb0c5248f2ce55ccbea395ae1860ab541ce9c157e68361796f0d066780010f",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent.egg-info/dependency_links.txt",
+      "size": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent.egg-info/entry_points.txt",
+      "size": 61,
+      "sha256": "ce3ab86fa3c307cd22986348710f15cd3a32f4fa7002681bf667aaa7659f5add",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent.egg-info/top_level.txt",
+      "size": 12,
+      "sha256": "e793dbd2fe24d5a0494821cb93865ff9ebf4d5b567fe98b58a945cd58a234edb",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__init__.py",
+      "size": 105,
+      "sha256": "4e922e62e67e2f650f55eb419109958c17a7bd3a2e2041174ac6aac21e572ff8",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/__main__.py",
+      "size": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/__pycache__/__init__.cpython-314.pyc",
+      "size": 279,
+      "sha256": "b1453c730e8a40a75c45870967a073eb3292c544233fed4c0cbd591cb4b05dda",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/__main__.cpython-314.pyc",
+      "size": 241,
+      "sha256": "1827ad3b74643f1ad201b03f52946e2ae076dc462805241f353f13d50c016ec6",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/api.cpython-314.pyc",
+      "size": 31491,
+      "sha256": "11af7ad7d0a82653fdd179346324e7689dd9d7c2f860a78b8d25333a6559d531",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/canonical.cpython-314.pyc",
+      "size": 2821,
+      "sha256": "8361b91ec2ffaf2beab573eb390b924b3070de11da482a250ffa63d01db56c67",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/cases.cpython-314.pyc",
+      "size": 14444,
+      "sha256": "292688e95d5754c21e01d2f1c7886b0c028dde797141aba17be63e9cd067f11d",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/cli.cpython-314.pyc",
+      "size": 14303,
+      "sha256": "432c63a6a080a92d3813a3438cf3d0d7d8270ff54272414c0def2103e2493714",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/diagnose.cpython-314.pyc",
+      "size": 4777,
+      "sha256": "5e4331fbead86b818c481bfa302245770f05db18d1f83379c10ea4d874d4733f",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/durable.cpython-314.pyc",
+      "size": 59943,
+      "sha256": "3ce7a85e1afd305f2d03f12dbcca212bf507f00d3bfa1a116a6747ebe6c2a6fe",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/effectflow.cpython-314.pyc",
+      "size": 22356,
+      "sha256": "e8c583dc3a5d5c18afde4e41035baf696248ffb3abc9fb565165cc40bb801fbe",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/effects.cpython-314.pyc",
+      "size": 18305,
+      "sha256": "5f1f07f70eb965bdc013e0e63059b16ea8e42ea9cd14138d496a31f0458f2bee",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/effectsvc.cpython-314.pyc",
+      "size": 20119,
+      "sha256": "ca3e80cd74ea0c1c7310b695ee238dca581bf75fafefe4fbcaf938ee16d7f6c4",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/engine.cpython-314.pyc",
+      "size": 38842,
+      "sha256": "33723ae65a031aee90a3c188dc5423702d2f2a93fab0997d17a8502e34ccf202",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/evaluate.cpython-314.pyc",
+      "size": 13722,
+      "sha256": "f58d9b5054e7e748e8339a5b17bdf004e5c61d22d30542445e9431b394ac095a",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/model.cpython-314.pyc",
+      "size": 15667,
+      "sha256": "3744a0660f29a5c4e1b0327cd3c958c4de09f53927ced2740402d816bd75e2e0",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/reference.cpython-314.pyc",
+      "size": 1228,
+      "sha256": "631b7227d7ff74f6329eadc454b974798bd601ee54cbaba31cbc0f27c702fb4e",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/round2.cpython-314.pyc",
+      "size": 11892,
+      "sha256": "9cf089bab1d5cce1a7963906709658d3a9b495e5af73b3148d0dcad63fcd455e",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/__pycache__/verify.cpython-314.pyc",
+      "size": 4169,
+      "sha256": "68bb3293647126d075aa530fc22c3f8c16e26ca0659b9116ea2ebbb44d836804",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "rewindagent/api.py",
+      "size": 22079,
+      "sha256": "3ef4357b7df0836cc08fbcc80ab37afe2f6f6458b489487d6178749c50dc0a73",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/canonical.py",
+      "size": 1045,
+      "sha256": "5d1dd7f66be9c7ed4c8431f57939bb706efbad5a3c6e85f03ea4850614795046",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/cases.py",
+      "size": 9236,
+      "sha256": "c11255a61f662e6b5f9349e333a5ac19c169246a18e98054516f2dcdd22c5e9e",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/cli.py",
+      "size": 8271,
+      "sha256": "9a184075c08d85a8a2d412a8e091aa968a81aedcec0e55f064a3dbfd23eb6a41",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/diagnose.py",
+      "size": 2525,
+      "sha256": "c3451eee08ca761c6df0680a4f8704cf201741ace5a2924853c729c3616ed692",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/durable.py",
+      "size": 41545,
+      "sha256": "ca42f49434d08ce8f19670495e66564fb31fa3503dd96d511729790f16107133",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/effectflow.py",
+      "size": 16681,
+      "sha256": "6568910c3c2110ab803e2dc27a4700265ff90304473810208ca4f096937d7c18",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/effects.py",
+      "size": 17255,
+      "sha256": "aa4999f8f90b51079bbaf8598a4469667945e37c486e240c5846169c29348e35",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/effectsvc.py",
+      "size": 12002,
+      "sha256": "c9c4b14d559b72b69286cd1fe297833b2e64c6bcad928f95e8fb8a709efdb54d",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/engine.py",
+      "size": 27690,
+      "sha256": "0e2ea75eea60adfd63020eca3b4ff6ea9f38ab9cfd33de69b023c84562126389",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/evaluate.py",
+      "size": 8238,
+      "sha256": "9351ee171269de753115ec844d9d6fdf4fcc2599adc1df1d46122affc5c63d53",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/model.py",
+      "size": 6622,
+      "sha256": "edc4d56a15a336550ee32cd890c1fb7cfe2654eff2bf906bb2756ac5885f3151",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/reference.py",
+      "size": 641,
+      "sha256": "ed52ba4f70485f732d6a176c6cfe25e889287dcf961648a159f56a533977fd4c",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/round2.py",
+      "size": 8033,
+      "sha256": "25580fc63cbc31c368aab5c0cde495367c804e8a71a6e3383a326166a35b065e",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "rewindagent/verify.py",
+      "size": 2653,
+      "sha256": "158bdc101094e40b5f8676b8ad57bdc52a30cdc49643dac25031c1fd24d2f6a8",
+      "purpose": "package source",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/__init__.py",
+      "size": 84,
+      "sha256": "3195de7cfc8e24446c21b2cf3e2cf2b6764deef832af48282394789bce27ef32",
+      "purpose": "project license or portable test support",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/__pycache__/__init__.cpython-314.pyc",
+      "size": 208,
+      "sha256": "70d765f756f5895d916e4d774db1a9a594d1ec56cac2f77257dacba592f7bb05",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/history_audit.cpython-314.pyc",
+      "size": 5210,
+      "sha256": "e6eadce9054a4d8f2a7fcec7ee566d96c90fb6602355fb348e4996730a37fe05",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/process_support.cpython-314.pyc",
+      "size": 2921,
+      "sha256": "9b13f8bab1d3c76febe89d3ab76781473977ae3281016a92ddd26b2fd7d8686a",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_durable_crash.cpython-314.pyc",
+      "size": 43402,
+      "sha256": "3ae119ac78170eea486e2e6fe300f99624d882ed281b6f8d61c270b2209f4235",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_effect_crash.cpython-314.pyc",
+      "size": 47804,
+      "sha256": "cc3373be3b2b61a939c37fa437d4904ab47ab1bffe93c4068a4400fa3f5b584b",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_finalization.cpython-314.pyc",
+      "size": 33394,
+      "sha256": "a6b7c3cf8ae778cdd63bcbbe97826a4d71c7c8c448ca653671e5f8513b66a03e",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_process_cleanup.cpython-314.pyc",
+      "size": 7651,
+      "sha256": "8b1c4228dc1b081aa3e198597f37b4be1c0cc8109c8d528605bb4f7f767799d0",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_properties.cpython-314.pyc",
+      "size": 12802,
+      "sha256": "b30198391fb1e6e9b4c0464e1b2472ebdd13857f36fa0b1ca188ed569812e0be",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_public_api.cpython-314.pyc",
+      "size": 26816,
+      "sha256": "2950c2b4bb106db72ce47e45800186d59fa86f252d33fae72e9924e6056b7d07",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_round2.cpython-314.pyc",
+      "size": 17208,
+      "sha256": "c3b7e7cea6bddb5187dec232e2c6dba0449974d9845b0239b11ac6f9ce4ae11b",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/__pycache__/test_targeted.cpython-314.pyc",
+      "size": 37195,
+      "sha256": "cb5ad5bdbf0019daca8cc6e7bcd412a92dd0623a5345807da0c0c1056b8a3662",
+      "purpose": "Generated local build/runtime/system file",
+      "upload_class": "exclude",
+      "classification_reason": "Not source for delivery; retained locally and never staged."
+    },
+    {
+      "path": "tests/history_audit.py",
+      "size": 2742,
+      "sha256": "5b4af1bd5ef20700e81057ef075e70aa6cdfa3d6ee2fbbc27909b3ddb42e4ec9",
+      "purpose": "project license or portable test support",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/process_support.py",
+      "size": 1392,
+      "sha256": "8df34bcbd3ff24ce13cace9f49ed375cb800a3eb24dbd9086b2b77b73d7ce03c",
+      "purpose": "project license or portable test support",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_durable_crash.py",
+      "size": 23315,
+      "sha256": "a7995d9b081d4d22cec4a1367f66a40fbbc7241b3ff68b40de062230dbdaed25",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_effect_crash.py",
+      "size": 31259,
+      "sha256": "3ff4d80cf2f433f624b4a291b873fb3ac3a57f2d341367d1105a8816bc291a4f",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_finalization.py",
+      "size": 21277,
+      "sha256": "27fd82beb65894deec61ff148200ed99147212c94a8143e9173832a19e2a3fb8",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_process_cleanup.py",
+      "size": 3264,
+      "sha256": "30fee92c6d67419a7d13e04e04a0930ed22f26f3da12e7077aac1af644f12463",
+      "purpose": "project license or portable test support",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_properties.py",
+      "size": 6719,
+      "sha256": "8a4c34e3e991f71a4ac71db658227c892dc7101f8c5c2a25878a6dfe655a89a8",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_public_api.py",
+      "size": 15053,
+      "sha256": "9764e058bcda43b8c8939cd1e2984338847ad667c9a0715016fd2dcddb2763e4",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_round2.py",
+      "size": 9885,
+      "sha256": "3457fe3165e504f1d4dc38c702c7b590b9efd8c10aef39b7a4e6c5ca61f4a182",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    },
+    {
+      "path": "tests/test_targeted.py",
+      "size": 18101,
+      "sha256": "4f0c02c631225c757db181ce95af11f577b313a46941e05bbc8f1d953b2b5f75",
+      "purpose": "tests",
+      "upload_class": "include",
+      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+    }
+  ]
+}

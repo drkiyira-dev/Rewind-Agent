@@ -1,0 +1,22 @@
+include README.md
+include NOTICE.md
+include LICENSE
+include pyproject.toml
+include MANIFEST.in
+recursive-include rewindagent *.py
+recursive-include tests *.py
+recursive-include examples *.py
+recursive-include examples *.json
+recursive-include docs *.md
+prune build
+prune dist
+prune results
+global-exclude *.sqlite
+global-exclude *.sqlite-journal
+global-exclude *.sqlite-wal
+global-exclude *.sqlite-shm
+global-exclude *.lock
+global-exclude *.ready.json
+global-exclude .env
+global-exclude __pycache__
+global-exclude *.pyc

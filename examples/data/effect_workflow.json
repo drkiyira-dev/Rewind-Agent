@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "steps": [
+    {"step_id": "prep", "tool": "inc", "reads": ["n"], "writes": ["n2"], "config": {}},
+    {"step_id": "append", "kind": "effect", "logical_id": "rec-1", "service_id": "local-append", "reads": ["n2"], "writes": ["ack"], "config": {}},
+    {"step_id": "tail", "tool": "inc", "reads": ["n2"], "writes": ["report"], "config": {}}
+  ]
+}

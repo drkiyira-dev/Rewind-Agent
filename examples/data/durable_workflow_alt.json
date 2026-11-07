@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "steps": [
+    {"step_id": "left_b", "tool": "inc", "reads": ["left_in"], "writes": ["left_out"], "config": {}},
+    {"step_id": "right", "tool": "inc", "reads": ["right_in"], "writes": ["right_out"], "config": {}},
+    {"step_id": "join", "tool": "add", "reads": ["left_out", "right_out"], "writes": ["total"], "config": {}}
+  ]
+}

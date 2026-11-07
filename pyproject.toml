@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rewindagent"
+version = "0.1.0"
+description = "Contract-bounded selective recovery with a small in-process calling API."
+readme = "README.md"
+license = "GPL-3.0-only"
+license-files = ["LICENSE", "NOTICE.md"]
+
+[project.scripts]
+rewindagent = "rewindagent.cli:console_main"
+
+[tool.setuptools.packages.find]
+include = ["rewindagent*"]

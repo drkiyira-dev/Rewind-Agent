@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "steps": [
+    {"step_id": "mail", "tool": "send", "reads": ["left_in"], "writes": [], "config": {}, "effect": true}
+  ]
+}
