@@ -62,14 +62,21 @@ class AppendClient:
             raw = response.read()
             if response.status in {301, 302, 303, 307, 308}:
                 return {"status": "unavailable", "reason": "redirect"}
+            conflict_response = (
+                response.status == 409 and method == "POST" and path == "/v1/effects"
+            )
+            if response.status != 200 and not conflict_response:
+                return {"status": "unavailable", "reason": f"http_{response.status}"}
             if not raw:
                 return {"status": "unavailable", "reason": f"http_{response.status}"}
             try:
                 parsed = json.loads(raw.decode("utf-8"))
-            except json.JSONDecodeError:
+            except (UnicodeDecodeError, json.JSONDecodeError):
                 return {"status": "unavailable", "reason": "malformed"}
             if not isinstance(parsed, dict):
                 return {"status": "unavailable", "reason": "malformed"}
+            if conflict_response and parsed.get("status") != "conflict":
+                return {"status": "unavailable", "reason": "http_409"}
             return parsed
         except (TimeoutError, OSError, http.client.HTTPException):
             return {"status": "unavailable", "reason": "transport"}
@@ -82,56 +89,66 @@ class _Server(ThreadingHTTPServer):
 
     def __init__(self, store: Path, profile: str, retention_ms: int) -> None:
         super().__init__(("127.0.0.1", 0), _Handler)
-        self.store = store
-        self.profile = PROFILES[profile]
-        self.profile_name = profile
-        self.retention_ms = retention_ms
-        self.pause_at: str | None = None
-        self.phase: str | None = None
-        self.query_mode = "normal"
-        self.gate = threading.Event()
-        self.gate.set()
-        self._init()
+        try:
+            self.store = store
+            self.profile = PROFILES[profile]
+            self.profile_name = profile
+            self.retention_ms = retention_ms
+            self.pause_at: str | None = None
+            self.phase: str | None = None
+            self.query_mode = "normal"
+            self.gate = threading.Event()
+            self.gate.set()
+            self._init()
+        except BaseException:
+            self.server_close()
+            raise
 
     def connect(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self.store, isolation_level=None)
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA journal_mode=DELETE")
-        conn.execute("PRAGMA synchronous=FULL")
-        conn.execute("PRAGMA foreign_keys=ON")
+        try:
+            conn.row_factory = sqlite3.Row
+            conn.execute("PRAGMA journal_mode=DELETE")
+            conn.execute("PRAGMA synchronous=FULL")
+            conn.execute("PRAGMA foreign_keys=ON")
+        except BaseException:
+            conn.close()
+            raise
         return conn
 
     def _init(self) -> None:
         conn = self.connect()
-        conn.execute("BEGIN IMMEDIATE")
-        conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS effects (
-                effect_id TEXT PRIMARY KEY,
-                idempotency_key TEXT,
-                logical_id TEXT NOT NULL,
-                payload_digest TEXT NOT NULL,
-                payload_json TEXT NOT NULL,
-                created_ms INTEGER NOT NULL
-            )
-            """
-        )
-        conn.execute(
-            """
-            CREATE TABLE IF NOT EXISTS http_log (
-                seq INTEGER PRIMARY KEY AUTOINCREMENT,
-                method TEXT NOT NULL,
-                path TEXT NOT NULL,
-                idempotency_key TEXT
-            )
-            """
-        )
-        if self.profile["idempotent"]:
+        try:
+            conn.execute("BEGIN IMMEDIATE")
             conn.execute(
-                "CREATE UNIQUE INDEX IF NOT EXISTS effects_key ON effects(idempotency_key)"
+                """
+                CREATE TABLE IF NOT EXISTS effects (
+                    effect_id TEXT PRIMARY KEY,
+                    idempotency_key TEXT,
+                    logical_id TEXT NOT NULL,
+                    payload_digest TEXT NOT NULL,
+                    payload_json TEXT NOT NULL,
+                    created_ms INTEGER NOT NULL
+                )
+                """
             )
-        conn.execute("COMMIT")
-        conn.close()
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS http_log (
+                    seq INTEGER PRIMARY KEY AUTOINCREMENT,
+                    method TEXT NOT NULL,
+                    path TEXT NOT NULL,
+                    idempotency_key TEXT
+                )
+                """
+            )
+            if self.profile["idempotent"]:
+                conn.execute(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS effects_key ON effects(idempotency_key)"
+                )
+            conn.execute("COMMIT")
+        finally:
+            conn.close()
 
     def wait_if(self, point: str) -> None:
         if self.pause_at == point:
@@ -308,10 +325,13 @@ def serve(store: Path, profile: str, retention_ms: int, ready: Path | None) -> N
     if profile not in PROFILES:
         raise SystemExit(2)
     server = _Server(store, profile, retention_ms)
-    host, port = server.server_address[:2]
-    if ready is not None:
-        ready.write_text(
-            json.dumps({"pid": __import__("os").getpid(), "base_url": f"http://{host}:{port}"}) + "\n",
-            encoding="utf-8",
-        )
-    server.serve_forever()
+    try:
+        host, port = server.server_address[:2]
+        if ready is not None:
+            ready.write_text(
+                json.dumps({"pid": __import__("os").getpid(), "base_url": f"http://{host}:{port}"}) + "\n",
+                encoding="utf-8",
+            )
+        server.serve_forever()
+    finally:
+        server.server_close()

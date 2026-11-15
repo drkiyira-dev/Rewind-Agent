@@ -342,7 +342,7 @@ class _Lock:
 
 
 def _uri(path: Path, mode: str) -> str:
-    return f"file:{path.resolve().as_posix()}?mode={mode}"
+    return f"{path.resolve().as_uri()}?mode={mode}"
 
 
 def _configure(conn: sqlite3.Connection, *, write: bool) -> None:
@@ -680,8 +680,6 @@ def _run_open(
     ).fetchall()}
     recomputed: list[str] = []
     reused: list[str] = []
-    if now_ms is None:
-        now_ms = int(time.time() * 1000)
     for index, step in enumerate(steps):
         if step["step_id"] in done:
             reused.append(step["step_id"])

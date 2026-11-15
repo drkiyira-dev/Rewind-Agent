@@ -26,6 +26,12 @@ Effect recovery applies only to the simulated `append.v1` service contract. Ther
 
 See the [API documentation](docs/api.md), [phase 2A contract](docs/phase2a-contract.md), and [phase 2B contract](docs/phase2b-contract.md). The original research definitions are in the [evaluation plan](docs/evaluation-plan.md) and [round 2 expectations](docs/round2-expectations.md).
 
+## Recovery boundary maintenance
+
+Recovery now rejects receipts for another logical operation, even when the payload is identical. SQLite filenames containing `#`, `?`, or `%` refer to the exact requested file. The append client accepts confirmations only from HTTP 200; HTTP 409 remains a submission conflict, and malformed or failed responses remain unavailable. Idempotent retries recheck the current time after network waits and immediately before sending. At the retention deadline, or when the clock is earlier than preparation, recovery remains `unknown`. An explicit `now_ms` is a deterministic test override, not a production clock.
+
+These fixes preserve the public API and storage format. The original research interpreter and frozen evidence are unchanged.
+
 ## Tests and offline experiments
 
 Run from the repository root:
@@ -38,7 +44,7 @@ python3 -m rewindagent eval --out "$run_dir/eval.json"
 python3 -m rewindagent round2 --out "$run_dir/round2.json"
 ```
 
-The verified portable suite contains 82 tests with no skips. Tests require permission to listen on loopback. Test outputs use separate temporary directories by default. To retain them under a chosen parent directory, set `REWIND_TEST_OUTPUT`; each run still creates a fresh subdirectory. The old `PHASE2A_WRITE` and `PHASE2B_WRITE` switches that overwrote historical evidence have been removed.
+The handoff portable suite contained 82 tests with no skips. The current suite also covers receipt identity, exact SQLite filenames, malformed HTTP responses, and retry deadlines. Tests require permission to listen on loopback. Test outputs use separate temporary directories by default. To retain them under a chosen parent directory, set `REWIND_TEST_OUTPUT`; each run still creates a fresh subdirectory. The old `PHASE2A_WRITE` and `PHASE2B_WRITE` switches that overwrote historical evidence have been removed.
 
 The owner chose to keep all seven frozen original evidence files local. They are absent from the public repository and distribution packages. A local workspace containing those originals can additionally run:
 

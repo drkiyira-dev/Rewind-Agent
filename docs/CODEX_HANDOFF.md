@@ -71,3 +71,9 @@ demo、eval、round2 均本轮独立执行，退出码 0。round2 仍为 `engine
 本轮只按清单白名单暂存，检查 staged 内容、配置/hooks/过滤器及实际待推送历史。精确提交、远程可见性、分支 SHA 和 CI 的最终事实由提交后回执给出，不在本文件预填 SHA。没有 CI 配置；不能把本地成功写成远程 CI 成功。
 
 当前授权不包括 force push、改写历史、改可见性、删分支或仓库、自动合并、发布包/Release、部署、调用真实业务服务或进入第三阶段。
+
+## 2026-11-15 core maintenance
+
+The maintenance candidate is based on commit `bcc020faa02e21ecd14f97e947c78a8099a3fd01`. It tightens receipt identity, SQLite filename encoding, HTTP response handling and retry retention checks, and closes append-service resources on initialization failure. Public signatures and database schemas are unchanged; the research conclusion remains `engineering_packaging`.
+
+The owner workspace also contains separate, uncommitted Phase 3A work. The owner explicitly selected core maintenance and retention of that work. Those files and edits are outside this candidate and must not be staged with it. This delivered core still contains no Phase 3 integration. Original evidence remains local; the current maintenance validation is recorded in the handoff manifest and new local results.

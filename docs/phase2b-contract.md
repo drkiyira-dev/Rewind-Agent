@@ -96,3 +96,9 @@ UNKNOWN 不是成功，也不是阶段 A 那种“失败提交后永远不再处
 P2 的 `effects.idempotency_key` 用于查询关联，没有该列的唯一索引，也不在 POST 路径检查已有键。独立新建的 P2 服务库中，直接发送两个相同身份、相同载荷的 HTTP POST，会产生两个不同 `effect_id`，真实生效数为 2。旧验收中的 `dedup_rows` 实际是 `effects WHERE idempotency_key IS NOT NULL` 的计数；新验收改称 `keyed_effect_rows`。旧证据保持原字节。
 
 每个服务库按同一 profile 启动和重启；没有验证在同一库上切换 profile。查询暂时未找到时客户端不再 POST，旧请求完成后可以查询确认，这一 P2 场景与直接重复 POST 的服务端非幂等验证分别保留。
+
+## 2026-11-15 边界维护
+
+追加客户端仅从 HTTP 200 采纳确认；POST `/v1/effects` 的 HTTP 409 仅接受 `conflict`。HTTP 错误或无效 UTF-8/JSON 返回 `unavailable`，不能凭响应体中的 `confirmed` 发布结果。连接在失败后也必须关闭。
+
+重试使用发送前的新时间，能力请求与 E2 故障边界的等待不能延长期限。期限判断为 `0 <= now - prepared_at < retention_ms`；超时或时间早于准备时间仍为 `unknown / retention_expired`。E2 之后因期限停止时，已持久化的尝试记录保留，不声称它一定发送过。显式 `now_ms` 仍是固定的测试时钟。服务端 TTL 清理仍未实现，客户端检查不构成跨进程时钟或第三方 API 的一般保证。

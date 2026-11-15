@@ -1,21 +1,22 @@
 {
   "schema": "rewindagent.handoff_manifest",
-  "round": "readme-language-20261107T232400-JST",
+  "round": "core-maintenance-20261115",
   "engineering_status": "READY",
   "git_status": "VERIFIED",
   "delivery_status": "NOT_PUSHED",
-  "snapshot_stage": "Pre-commit documentation follow-up snapshot. Final commit/remote SHA and push status are recorded in the external receipt.",
+  "snapshot_stage": "Reviewed pre-commit core maintenance candidate. Final commit and remote verification are in the local delivery receipt.",
   "research_conclusion": "engineering_packaging",
   "phase3_started": false,
   "license_status": "owner_selected_GPL-3.0-only",
   "license_source": "https://www.gnu.org/licenses/gpl-3.0.txt",
   "license_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-  "prior_manifest_sha256": "96398e6708de8819ffef0759a42e76c8c318bbee72f016d87f2a4279bf9cd4e2",
-  "prior_manifest_path": "results/codex-handoff/readme-language-20261107T232400-JST/prior/handoff-manifest.json",
+  "prior_manifest_sha256": "174559aa3dfc1888f3fc8b3882540a2cad4f8e75cbd5f44901f198f3eaaaab6d",
+  "prior_manifest_path": "results/core-maintenance/20261115/prior/handoff-manifest.json",
   "change_basis": [
-    "Owner requested an English primary README and an additional readme-CH.",
-    "README.md is English; readme-CH.md preserves the previous Chinese text with reciprocal language links. All six command blocks are unchanged.",
-    "MANIFEST.in includes readme-CH.md in the source distribution. Runtime code, tests, license and behavior remain unchanged."
+    "Owner selected improvements to the already delivered core; uncommitted Phase 3A work is preserved and excluded.",
+    "Require matching logical operation identity for receipt reuse; encode SQLite paths without changing filenames.",
+    "Treat malformed/failed HTTP responses as unavailable and close append-service resources on startup failure.",
+    "Recheck retention after network waits and after the E2 persisted-attempt boundary; do not retry at/after deadline or before preparation time."
   ],
   "self_hash": "not_included",
   "self_entry": {
@@ -26,7 +27,7 @@
   },
   "git": {
     "repository_root": ".",
-    "initial_state": "Existing repository on main at 9211e3e4899abfa4503a622735ecdb9e4ce043cf; clean index/worktree before this documentation update.",
+    "initial_state": "Existing main at bcc020faa02e21ecd14f97e947c78a8099a3fd01; empty index; separate uncommitted owner Phase 3A edits.",
     "target": "drkiyira-dev/Rewind-Agent",
     "requested_visibility": "public",
     "branch": "main",
@@ -37,28 +38,60 @@
     "active_hooks": 0,
     "configured_filters": 0,
     "github_workflows": 0,
-    "prior_history_scan": "Base commit was already audited and verified remotely; only four documentation/packaging/manifest files are changed in this follow-up."
+    "prior_history_scan": "Two existing audited commits match the previously verified remote; this maintenance adds one reviewed core-only commit."
   },
   "verification": {
-    "scope": "Documentation and packaging follow-up; no new functional-test claim.",
-    "source_sha256": "4e3f85d4f0bd2edb1be5b4017036172dcc5ca4df2322883b633887e3b66339a6",
+    "scope": "Current reviewed core candidate, excluding owner Phase 3A overlay.",
+    "base_commit": "bcc020faa02e21ecd14f97e947c78a8099a3fd01",
+    "source_sha256": "3b7308c7b9f65aaf6d07e581cd9c8daf47ec2e84db9a3d77a0b0b67b1513d03d",
     "source_digest_definition": "sorted relative path UTF-8 + NUL + content + NUL; manifest excluded",
-    "runtime_sha256": "9f7c7aa5022856410288a128cc25f1eec41d7d573907c44e32901d971d34b6da",
-    "runtime_and_test_files_match_base_commit": true,
-    "base_commit": "9211e3e4899abfa4503a622735ecdb9e4ce043cf",
-    "carried_forward_engineering_validation": {
-      "source_sha256": "6208288f2fae720254929f81825cdc1b89358cdc79102215e9613c353ae1a3ad",
-      "functional_tests": 82,
-      "historical_tests": 3,
-      "installed_recovery_flows": 7,
-      "source": "previous manifest and verified base commit",
-      "rerun_for_translation": false
+    "runtime_sha256": "7f37795b9ac86884f117620eeaadcae84497a626df88944c648ee0969a39bdb5",
+    "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
+    "python": "3.14.3",
+    "sqlite": "3.53.4",
+    "baseline_tests": 82,
+    "portable_suites": [
+      {
+        "tests": 100,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "name": "final-suite",
+        "returncode": 0,
+        "children": 149,
+        "all_children_reaped": true,
+        "all_streams_closed": true,
+        "resource_warnings": 0
+      },
+      {
+        "tests": 100,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "name": "sdist-suite",
+        "returncode": 0,
+        "children": 149,
+        "all_children_reaped": true,
+        "all_streams_closed": true,
+        "resource_warnings": 0
+      }
+    ],
+    "new_regression_tests": 18,
+    "regressions_against_old_core": "18 tests: expected failure (32 subtest failures, 2 errors); baseline was separately 82/82. Original HTTP malformed input raised UnicodeDecodeError.",
+    "history_audits": {
+      "count": 3,
+      "passed": true,
+      "scope": "Explicit read-only audit using owner-local original files; not part of sdist."
     },
-    "documentation": {
-      "command_blocks_unchanged": 6,
-      "relative_links_checked": 18,
-      "chinese_original_preserved_except_navigation": true
-    },
+    "demo_eval_round2_exit_codes": [
+      0,
+      0,
+      0
+    ],
     "build": {
       "returncode": 0,
       "tools": {
@@ -67,44 +100,78 @@
         "packaging": "26.3",
         "pyproject_hooks": "1.3.3"
       },
-      "mode": "--no-isolation; PIP_NO_INDEX=1; wheel built from generated sdist",
+      "tool_source": "pip tool setup permitted PyPI and used cached wheels; no fresh-cache offline claim",
+      "mode": "PIP_NO_INDEX=1; --no-isolation; wheel from sdist plus clean extracted-sdist rebuild",
       "artifacts": [
         {
-          "path": "results/codex-handoff/readme-language-20261107T232400-JST/dist/rewindagent-0.1.0-py3-none-any.whl",
-          "size": 68509,
-          "sha256": "77117e826e4fe4551e1e5bf93865d90bf151ed343b35484946bc96ab594583ad",
-          "member_count": 24,
-          "member_contents_and_paths_checked": true
+          "name": "rewindagent-0.1.0-py3-none-any.whl",
+          "size": 69231,
+          "sha256": "f1bf5a826ba2f58f452e9d866e6f9e522e297bab9b8ef2070230b2a72fbfd1e1",
+          "members": 24,
+          "paths_and_contents_scanned": true
         },
         {
-          "path": "results/codex-handoff/readme-language-20261107T232400-JST/dist/rewindagent-0.1.0.tar.gz",
-          "size": 124664,
-          "sha256": "319a892d3a2051ea1a2778b16ae856eb5882f802e0a920c33ca00216835497d1",
-          "member_count": 60,
-          "member_contents_and_paths_checked": true
+          "name": "rewindagent-0.1.0.tar.gz",
+          "size": 131170,
+          "sha256": "4121caad388f3690daeb4c7db8fbeabb9c04b3a21aa04ca69d92e81ff302491d",
+          "members": 70,
+          "paths_and_contents_scanned": true
         }
       ],
-      "sdist_has_both_readmes": true,
-      "wheel_metadata_is_english_readme": true
+      "required_sdist_files_match_candidate": true,
+      "rebuilt_wheel_members_identical": true,
+      "installed_wheel_sha256": "397098c4a347c4cf84e538bbedea8157a192d0e8abba0b8864fea96a8ea2ec56"
     },
     "installed": {
-      "returncode": 0,
       "no_index": true,
       "no_deps": true,
-      "from_site_packages": true,
-      "source_PYTHONPATH": false,
-      "metadata_language_check": true,
-      "demo_exit": 0
+      "disable_pip_version_check": true,
+      "source_pythonpath": false,
+      "site_packages_import": true,
+      "flows": [
+        {
+          "name": "pure_normal",
+          "passed": true
+        },
+        {
+          "name": "pure_sigkill_resume",
+          "pid": 91222,
+          "passed": true
+        },
+        {
+          "name": "effect_normal",
+          "passed": true
+        },
+        {
+          "name": "published_resume_no_extra_effect",
+          "passed": true
+        },
+        {
+          "name": "receipt_loss_idempotent_resume",
+          "passed": true
+        },
+        {
+          "name": "unknown_then_reconcile",
+          "passed": true
+        },
+        {
+          "name": "insufficient_evidence_stays_unknown",
+          "passed": true
+        }
+      ],
+      "children_reaped": 16,
+      "resource_warnings": 0,
+      "harness_note": "First harness attempt failed due to a helper shadowing http; corrected harness, rerun passed. Project code unchanged for this correction; failed log retained."
     },
-    "candidate_file_count": 55,
+    "candidate_file_count": 58,
     "frozen_hashes_unchanged": 7,
     "actual_model_calls": 0,
-    "local_evidence_root": "results/codex-handoff/readme-language-20261107T232400-JST",
-    "evidence_paths": {
-      "validation": "validation.json",
-      "build": "build.log",
-      "installation": "install.log",
-      "smoke": "smoke.log"
+    "candidate_scan_findings": [],
+    "local_evidence_root": "results/core-maintenance/20261115",
+    "previous_verification": {
+      "round": "readme-language-20261107T232400-JST",
+      "source_sha256": "4e3f85d4f0bd2edb1be5b4017036172dcc5ca4df2322883b633887e3b66339a6",
+      "manifest_sha256": "174559aa3dfc1888f3fc8b3882540a2cad4f8e75cbd5f44901f198f3eaaaab6d"
     }
   },
   "rules": [
@@ -153,7 +220,7 @@
       "sha256": "2ee44808f85faaabbd86739892fdf007ecef1ec5fca13757bd7da32518d1a3d7",
       "purpose": "ignore hints; not an upload whitelist",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "LICENSE",
@@ -161,7 +228,7 @@
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "MANIFEST.in",
@@ -169,7 +236,7 @@
       "sha256": "3f5d6dfbd4d4044c282cd6f83adeaccf3b3839204511897ee78e901d34025927",
       "purpose": "sdist file list",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "NOTICE.md",
@@ -177,15 +244,15 @@
       "sha256": "7ffc54c508a4115aa804a1756566c9b8190ecf5d1b2a747e2f5ec29c2ec6c67d",
       "purpose": "third-party notice; license not selected",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "README.md",
-      "size": 10764,
-      "sha256": "7dc9b2d03d9b83e9bea80cd20feb2d542870f5b00fda24591b2dec4113e93c11",
+      "size": 11652,
+      "sha256": "079724c5fc059ccd785808f885121729b35ed7d243bebf6611495b451690feaf",
       "purpose": "Primary English README with link to Chinese version",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "build/lib/rewindagent/__init__.py",
@@ -325,19 +392,19 @@
     },
     {
       "path": "docs/CODEX_HANDOFF.md",
-      "size": 8546,
-      "sha256": "bfe44374528431a04ff36010da86ce1bd46fecda8ac67f2b15e1512cfa5c9e6b",
+      "size": 9363,
+      "sha256": "202164395ebd514464fa6ebde54af98c6a62915968c97dc541e667b9dba2dfcc",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/api.md",
-      "size": 4166,
-      "sha256": "166faf346f93395c072c0b4fd17a7f181dab27566b32f0330654b51959e413a7",
+      "size": 4412,
+      "sha256": "4a7e5dd3a1a69d4b1eb90a7ed5fdb2b68347fc8c46112206053a568492b955ba",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/evaluation-plan.md",
@@ -345,23 +412,23 @@
       "sha256": "918db0d769585e2cb2b2749f57962745d01252f10f2fdee8c8fee0357a39ed2c",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/phase2a-contract.md",
-      "size": 6915,
-      "sha256": "796082586b9fc17f4d4316f45d6e704f473f5e04319b937bb3c620b30f912176",
+      "size": 7174,
+      "sha256": "68961c3fd6e52d93e240f99b6a4d705889f4f1fb24c6343c7ff89b6cbff1cf9a",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/phase2b-contract.md",
-      "size": 7353,
-      "sha256": "0005d5383f81a7c8169e5bd3382d756f0524f8a81d4cad20d17fbfb79a29f575",
+      "size": 8107,
+      "sha256": "f5dd45295ecc35e9fe57b7ec0277840aaca33e14d6d4c8be927a836adc79919e",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/recovery-contract.md",
@@ -369,7 +436,7 @@
       "sha256": "f15f2dab0b46634cec3042466fc7e0502412610102f79a57943748c9e25b4737",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/review.md",
@@ -377,7 +444,7 @@
       "sha256": "fff3ecbba74f7c8780dfd9148c42e5ae87a24f65005f49ad7806fdacdfde46de",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "docs/round2-expectations.md",
@@ -385,7 +452,7 @@
       "sha256": "f5cc4cb3184e2c575078bdcf67c4617fbd15c24b5cfd9050f849329b8ed83441",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/__pycache__/durable_run.cpython-314.pyc",
@@ -401,7 +468,7 @@
       "sha256": "c161531f0548a797122b3a54e3158127dfe1a12c18b9c891342607ac23d258cd",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/durable_boom.json",
@@ -409,7 +476,7 @@
       "sha256": "ebaabe9d5e0aa49289ff6c18344fc7ae1cd327151ef37156e0da2a5708bb397d",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/durable_effect.json",
@@ -417,7 +484,7 @@
       "sha256": "eb2dc926422c2a4b06e53f58295c24d67383aeebb4ec61ebc09360acabc37e9c",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/durable_snapshot_alt.json",
@@ -425,7 +492,7 @@
       "sha256": "fd2a03970cbd55dcc89db9bc451512af99849f5bc5b136d3425e2b962111aa98",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/durable_workflow.json",
@@ -433,7 +500,7 @@
       "sha256": "a8fc381f3dd1a98699b26028c8776d79a9d28776db7e627bc1f50e9d55da78ff",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/durable_workflow_alt.json",
@@ -441,7 +508,7 @@
       "sha256": "b98798bad4981c3af2b545e7edfd58644d9614ee56d4e4c490e981ba04a08cda",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/effect_snapshot.json",
@@ -449,7 +516,7 @@
       "sha256": "c1a75f24b4d3ec8ec85ef9c26ab5262c89cf094faa3a7ba27ec60372b41d42e2",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/effect_workflow.json",
@@ -457,7 +524,7 @@
       "sha256": "05e63a4f58c17b8f464515523d8ca05fd7195d8d91860b92b78d870cc4ece247",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/data/snapshot.json",
@@ -465,7 +532,7 @@
       "sha256": "aff536e0806213bd931dab541fa8fe020d2093742c89d608954a6bcdc128dae5",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/durable_run.py",
@@ -473,7 +540,7 @@
       "sha256": "69b467686c2c2ae224a8376c174391ec90f144737b067d15bc34d3107569a564",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "examples/effect_run.py",
@@ -481,7 +548,7 @@
       "sha256": "3057bc2a7ed60df1f2760a10407584251427aa9ea49c577aa3a5f4a88046e5d9",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "pyproject.toml",
@@ -489,15 +556,15 @@
       "sha256": "6b9b22c165489cc3482b6ae59a544fa9cd4cb93152c38ffaa5a0c17ea9352cc8",
       "purpose": "package metadata, version 0.1.0, no license field",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "readme-CH.md",
       "purpose": "Chinese README with link to the English version",
       "upload_class": "include",
-      "classification_reason": "Owner explicitly requested an additional Chinese README.",
-      "size": 8990,
-      "sha256": "b44ae5451191fdacd5dfc43f67c4c35133ea9d2dbf971a4a4c0d8bd56fab17f6"
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded.",
+      "size": 9733,
+      "sha256": "3e26840364b51c0dd2583d972afcc3ea1cfe880d325621e1db1317e0d14829db"
     },
     {
       "path": "results/codex-handoff/20261107T224828-JST/affected/children-stderr.json",
@@ -1700,6 +1767,310 @@
       "sha256": "207bf774cc314bb00488009147d2caeb6fa1e12a0983ba0034f3c3d7f0e70c94"
     },
     {
+      "path": "results/core-maintenance/20261115/archive-scan.json",
+      "size": 540,
+      "sha256": "5cf7859ba8ffc86b319ba8d03ae67789545d31273a0e275a901e164f2452d1d1",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/baseline.log",
+      "size": 11491,
+      "sha256": "556c71a018ea1161fb684867d2cf330e047fd2fba1c40c0c0ac07e500af5b092",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/build-tools.log",
+      "size": 771,
+      "sha256": "c01d4c40ec3bd419b4defa3f4f21aecc573763cacf579a8685daf6ff9a7bcdb9",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/build.log",
+      "size": 14604,
+      "sha256": "832aa8b0d956b026b6837a2928d00c7bff9a2b60c9964a4498b25cd7fc2f7f08",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/candidate.json",
+      "size": 9349,
+      "sha256": "18c99fa47f1c38af787feec3da4d48c4dd675abebdf3a39f89ec002e53fb4157",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/demo.log",
+      "size": 532,
+      "sha256": "3c847a19c67445c2dc0f1dfccf40df6a77ab84f28bfead8b49e2a954975d0037",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 69231,
+      "sha256": "f1bf5a826ba2f58f452e9d866e6f9e522e297bab9b8ef2070230b2a72fbfd1e1",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/dist/rewindagent-0.1.0.tar.gz",
+      "size": 131170,
+      "sha256": "4121caad388f3690daeb4c7db8fbeabb9c04b3a21aa04ca69d92e81ff302491d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/eval.json",
+      "size": 269300,
+      "sha256": "b29a3188cf4bf60e7c80a0103797ec9f83ed72496941bcab81d28c2dd293e4cd",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/eval.log",
+      "size": 153,
+      "sha256": "e297cfca0375610865085e788d8b33c6af8ee319e433a6ebca8e69503e20e557",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/final-suite.log",
+      "size": 14887,
+      "sha256": "30d6b47a7836220cca25efa29693a83076f30a582789cb2afe5e597bbba2946f",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/final-suite/rewind-tests-tdli_vgm/acceptance.json",
+      "size": 4184,
+      "sha256": "e7a698b3721cd3c58937baa08ff7d3e1859bf920f9ca45c81a53b74c52345ce4",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/final-suite/rewind-tests-tdli_vgm/phase2a-crash-results.json",
+      "size": 3737,
+      "sha256": "36fa4f344496f03d347a249fca35cd750abe9b9e9a5b7d4cac60af23be3d41e1",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/final-suite/rewind-tests-tdli_vgm/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "6e8640d01a552679c2c448f11f0c9b563132cf5ceef1264e015344622669d116",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/final-suite/test-results.json",
+      "size": 21069,
+      "sha256": "e0ea96b602acc3efcc03dd261707c557c1469b5c163b95a98599316f04d704d3",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/frozen-before.json",
+      "size": 1235,
+      "sha256": "2e6fcf5a070b5a61f0937b6f8e1180da8a230b8b340acca6a31db295ca4d2663",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/git-precheck.json",
+      "size": 466,
+      "sha256": "582339dcbaf5d736697ee5d921ed97609484189b7c5bdaf22415d5a2ff88572f",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/history-audit.log",
+      "size": 497,
+      "sha256": "609601863111e9eda79cd362498e3f09a2b431ca11f6c97a30fcb41944358654",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/install.log",
+      "size": 426,
+      "sha256": "f1fc8046c3065a7e1be7e6496d422084376c45cd2d06a458906ed1b54cff6bff",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/installed-flows-attempt1.log",
+      "size": 960,
+      "sha256": "8e27496321d3bb1b0b7dd28223bb00a246006c60187001dfb4d58516a7c8877f",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/installed-flows.json",
+      "size": 2491,
+      "sha256": "7c54645dddb29209f89b0d04481340308b23a357021dc722f3c450bb2962a277",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/installed-flows.log",
+      "size": 78,
+      "sha256": "e57ab7142af098931d47446b93cb0ec76e554c3c216fd78bbf2da46a0854823e",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/owner-state-before.json",
+      "size": 1681,
+      "sha256": "fe4e95f91a927cdc7183ef65074d15787844b3ea6255d0b150cd649ecef9efb4",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/prior/handoff-manifest.json",
+      "size": 126062,
+      "sha256": "174559aa3dfc1888f3fc8b3882540a2cad4f8e75cbd5f44901f198f3eaaaab6d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/rebuilt/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 69231,
+      "sha256": "397098c4a347c4cf84e538bbedea8157a192d0e8abba0b8864fea96a8ea2ec56",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/regressions-before-verified.log",
+      "size": 36612,
+      "sha256": "64303b39f2811b0e7949b9fee5ba0ce8543bd07503bb1dc0ced03b9c572e14dc",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/regressions-before.log",
+      "size": 43233,
+      "sha256": "f6936c45063ea79fbea18ff252263ab25aace0a74f3f738ed24725d26abccb5e",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/rewind-tests-a0cvito0/acceptance.json",
+      "size": 4184,
+      "sha256": "5e87638af009cfe51fa59d0ee7d46ca2ff7b5f16044b0cc7dc468c2b271f201b",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/rewind-tests-a0cvito0/phase2a-crash-results.json",
+      "size": 3737,
+      "sha256": "37396e5d05935eb738e4aa9c000ef86696b9c5503138d943ed1e152cb3b13210",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/rewind-tests-a0cvito0/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "d2e74a28e30ea50a3516070dae56b8b8dbca195f61f0357e12c8c883e02afd4d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/round2.json",
+      "size": 238622,
+      "sha256": "e88d4a3d998b8e6b6c187240552198dfaf2defd1fd89618a9685bdd16a96174d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/round2.log",
+      "size": 171,
+      "sha256": "b56fab4c0ce9166933e336f5b8814b2252212ba2da3ba83a3da46be27f092e0d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-build.log",
+      "size": 7185,
+      "sha256": "606990e2d91a4985f1c39c280020ad7d750e52812dad2f4b9dd319bcba49753a",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-suite.log",
+      "size": 14907,
+      "sha256": "3deb93524be33662a7795abca673bca1cb30c23fb735240aaad166462185b5e2",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-suite/rewind-tests-go2ydseq/acceptance.json",
+      "size": 4184,
+      "sha256": "300c5f4e9517503a9d10688d3512afb348079c1cede9790f00d17ebabbafb438",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-suite/rewind-tests-go2ydseq/phase2a-crash-results.json",
+      "size": 3757,
+      "sha256": "3153735a0b40bc62bbc2b5f454d9cad937ddfffca0434fc18d5cfd3245bd8bd3",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-suite/rewind-tests-go2ydseq/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "f72dfea3d4803efb204b84a9c2dccd287eae414e0e97b83acb2b1e2122fa9e7d",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
+      "path": "results/core-maintenance/20261115/sdist-suite/test-results.json",
+      "size": 21069,
+      "sha256": "9ee59709a7cac35333b16a28271114773419d671d01e2e229415d7b072195b38",
+      "purpose": "Core maintenance local validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Full logs, raw outputs and packages remain local under owner instruction."
+    },
+    {
       "path": "results/eval-rerun.json",
       "size": 263611,
       "sha256": "6a43d6affb1160a85cf5d4e390f40a68470fdf68ccf47c98191525b98ac074ec",
@@ -1935,7 +2306,7 @@
       "sha256": "4e922e62e67e2f650f55eb419109958c17a7bd3a2e2041174ac6aac21e572ff8",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/__main__.py",
@@ -1943,7 +2314,7 @@
       "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/__pycache__/__init__.cpython-314.pyc",
@@ -2083,11 +2454,11 @@
     },
     {
       "path": "rewindagent/api.py",
-      "size": 22079,
-      "sha256": "3ef4357b7df0836cc08fbcc80ab37afe2f6f6458b489487d6178749c50dc0a73",
+      "size": 22616,
+      "sha256": "d7a54b2410ec533eafeccac021e6d0ffe6fccce5f0153e2337f765fbd04f7b94",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/canonical.py",
@@ -2095,7 +2466,7 @@
       "sha256": "5d1dd7f66be9c7ed4c8431f57939bb706efbad5a3c6e85f03ea4850614795046",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/cases.py",
@@ -2103,7 +2474,7 @@
       "sha256": "c11255a61f662e6b5f9349e333a5ac19c169246a18e98054516f2dcdd22c5e9e",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/cli.py",
@@ -2111,7 +2482,7 @@
       "sha256": "9a184075c08d85a8a2d412a8e091aa968a81aedcec0e55f064a3dbfd23eb6a41",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/diagnose.py",
@@ -2119,23 +2490,23 @@
       "sha256": "c3451eee08ca761c6df0680a4f8704cf201741ace5a2924853c729c3616ed692",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/durable.py",
-      "size": 41545,
-      "sha256": "ca42f49434d08ce8f19670495e66564fb31fa3503dd96d511729790f16107133",
+      "size": 41474,
+      "sha256": "bdb86a940b198f5fb41d1a6ce4828c286ec14b39b65f18ad194518722ce3b51a",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/effectflow.py",
-      "size": 16681,
-      "sha256": "6568910c3c2110ab803e2dc27a4700265ff90304473810208ca4f096937d7c18",
+      "size": 17230,
+      "sha256": "91b785c006329412aadc1a075d433f5fc89bcacf825c2872094bf6709838dd66",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/effects.py",
@@ -2143,15 +2514,15 @@
       "sha256": "aa4999f8f90b51079bbaf8598a4469667945e37c486e240c5846169c29348e35",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/effectsvc.py",
-      "size": 12002,
-      "sha256": "c9c4b14d559b72b69286cd1fe297833b2e64c6bcad928f95e8fb8a709efdb54d",
+      "size": 12914,
+      "sha256": "72b3909963c6b045354092254eeec4e977b85eed994339ccbe6bc733e4a4555a",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/engine.py",
@@ -2159,7 +2530,7 @@
       "sha256": "0e2ea75eea60adfd63020eca3b4ff6ea9f38ab9cfd33de69b023c84562126389",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/evaluate.py",
@@ -2167,7 +2538,7 @@
       "sha256": "9351ee171269de753115ec844d9d6fdf4fcc2599adc1df1d46122affc5c63d53",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/model.py",
@@ -2175,7 +2546,7 @@
       "sha256": "edc4d56a15a336550ee32cd890c1fb7cfe2654eff2bf906bb2756ac5885f3151",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/reference.py",
@@ -2183,7 +2554,7 @@
       "sha256": "ed52ba4f70485f732d6a176c6cfe25e889287dcf961648a159f56a533977fd4c",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/round2.py",
@@ -2191,7 +2562,7 @@
       "sha256": "25580fc63cbc31c368aab5c0cde495367c804e8a71a6e3383a326166a35b065e",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "rewindagent/verify.py",
@@ -2199,7 +2570,7 @@
       "sha256": "158bdc101094e40b5f8676b8ad57bdc52a30cdc49643dac25031c1fd24d2f6a8",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/__init__.py",
@@ -2207,7 +2578,7 @@
       "sha256": "3195de7cfc8e24446c21b2cf3e2cf2b6764deef832af48282394789bce27ef32",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/__pycache__/__init__.cpython-314.pyc",
@@ -2303,7 +2674,7 @@
       "sha256": "5b4af1bd5ef20700e81057ef075e70aa6cdfa3d6ee2fbbc27909b3ddb42e4ec9",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/process_support.py",
@@ -2311,7 +2682,15 @@
       "sha256": "8df34bcbd3ff24ce13cace9f49ed375cb800a3eb24dbd9086b2b77b73d7ce03c",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
+    },
+    {
+      "path": "tests/test_append_client.py",
+      "size": 10725,
+      "sha256": "e2df6afee5096ae4babf7574ac60ad78e9201455fe53ba819a2e479081e41272",
+      "purpose": "Core recovery boundary regression test",
+      "upload_class": "include",
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_durable_crash.py",
@@ -2319,7 +2698,7 @@
       "sha256": "a7995d9b081d4d22cec4a1367f66a40fbbc7241b3ff68b40de062230dbdaed25",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_effect_crash.py",
@@ -2327,7 +2706,15 @@
       "sha256": "3ff4d80cf2f433f624b4a291b873fb3ac3a57f2d341367d1105a8816bc291a4f",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
+    },
+    {
+      "path": "tests/test_effect_retention.py",
+      "size": 4001,
+      "sha256": "7468858465e174aa116ae5bcbc88ca6aedb5dc70693dc48120d9814dd60ddd8d",
+      "purpose": "Core recovery boundary regression test",
+      "upload_class": "include",
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_finalization.py",
@@ -2335,7 +2722,7 @@
       "sha256": "27fd82beb65894deec61ff148200ed99147212c94a8143e9173832a19e2a3fb8",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_process_cleanup.py",
@@ -2343,7 +2730,7 @@
       "sha256": "30fee92c6d67419a7d13e04e04a0930ed22f26f3da12e7077aac1af644f12463",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_properties.py",
@@ -2351,7 +2738,7 @@
       "sha256": "8a4c34e3e991f71a4ac71db658227c892dc7101f8c5c2a25878a6dfe655a89a8",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_public_api.py",
@@ -2359,7 +2746,15 @@
       "sha256": "9764e058bcda43b8c8939cd1e2984338847ad667c9a0715016fd2dcddb2763e4",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
+    },
+    {
+      "path": "tests/test_recovery_boundaries.py",
+      "size": 4657,
+      "sha256": "88a02bce7c3a172d1bc9bd8711541b873b47cf4df8b6a218374078295d49111a",
+      "purpose": "Core recovery boundary regression test",
+      "upload_class": "include",
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_round2.py",
@@ -2367,7 +2762,7 @@
       "sha256": "3457fe3165e504f1d4dc38c702c7b590b9efd8c10aef39b7a4e6c5ca61f4a182",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
     },
     {
       "path": "tests/test_targeted.py",
@@ -2375,7 +2770,112 @@
       "sha256": "4f0c02c631225c757db181ce95af11f577b313a46941e05bbc8f1d953b2b5f75",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized reviewed source, tests, examples, documents, build configuration and manifest only."
+      "classification_reason": "Reviewed core candidate, authorized for this maintenance; owner Phase 3A overlay is excluded."
+    }
+  ],
+  "phase3_scope": "No Phase 3 files in this candidate; separate owner workspace edits are retained locally.",
+  "owner_worktree_overlays": [
+    {
+      "path": "docs/phase3a-contract.md",
+      "sha256_before": "1677134e5d463b44c7f70d0b07b84722e60a4b72a62809f3b7e2d7220e4f322f",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "examples/data/agent_fixture.json",
+      "sha256_before": "5513fb616e3c299482d1770efdf1133ffcbd4d835c7b5eb82b8949b5d9d29f64",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "examples/data/agent_snapshot.json",
+      "sha256_before": "b31568794d70362bb32cb92470933082e26e57e2126d8dd0d39b86e7d217181d",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "examples/responses_agent.py",
+      "sha256_before": "473a3f2de8a8e052ffe89f8efebe4c61a0e55a65e14d6584c7d16e9691771f6e",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/adapters/__init__.py",
+      "sha256_before": "360bf9980e018b768c91ab16722df6c2f691d9e968cc8d6d1d5ca2b6cafd6795",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/adapters/openai_responses.py",
+      "sha256_before": "66466e0b521fc7a204d59ec690313e65536fa4aa240967a9b3ae87e56087dd30",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/agent.py",
+      "sha256_before": "71b4c9378842fd9e9392cbe5db50cbe75a1f789b03322e53c2e43e475d86463b",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/agent_store.py",
+      "sha256_before": "0469f96554bf96d423e4e8b0d2581f8ea3ef7a6d8144392eaeb4ad8e2b191f47",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/protocolsvc.py",
+      "sha256_before": "943f09ab282014726c7617998eb086b325fee1f47929b45cd9740973cec3d922",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "tests/test_agent_import.py",
+      "sha256_before": "3862a9c684dad4a7646eb66bb5fac7cc3ae9dfbbd08f4cbc1f7287496f71a0e7",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "tests/test_agent_recovery.py",
+      "sha256_before": "e69f7836da6e5416acf34da8897c11a35ca37d713277db23ef315f59819f1912",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "tests/test_responses_adapter.py",
+      "sha256_before": "f73fc2eaeaeb25818207f321d602360416b1dce6fbbc5f7dbf05e2080323c38a",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "README.md",
+      "sha256_before": "eccf2d8b10404eae607fa69effc012395a4d4ab6a565d1d3f71a42aeef9dbea5",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256_before": "dbf5e8818d16ed3984a7924de7a3bacc925ba5c988c087d0450741f92994dbcf",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "readme-CH.md",
+      "sha256_before": "9b3ca6ebdd504865c584b3919d3b9d67ffa1fd5614bbaeca1473c030634c4b0f",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/cli.py",
+      "sha256_before": "f72d856a0993a0a182bd25591c4910f6fce54533b42a793556f703a5420dc601",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
+    },
+    {
+      "path": "rewindagent/durable.py",
+      "sha256_before": "7877f3897a5a031b50d58516bbe78def173c0db7e6819c88249964104915c25c",
+      "upload_class": "local_only",
+      "reason": "Existing uncommitted Phase 3A work excluded from this candidate; overlapping core edits are merged without dropping owner edits."
     }
   ]
 }

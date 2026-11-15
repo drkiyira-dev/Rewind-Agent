@@ -74,3 +74,7 @@ python -m rewindagent durable inspect --store task.sqlite --run-id demo
 `durable run` 和 `durable resume` 还要求调用方在命令行给出可导入的登记表。脚本入口不把登记表放进数据库。契约和崩溃点见 `docs/phase2a-contract.md`。
 
 混合外部效果不在上面的纯计算入口里。显式使用 `examples/effect_run.py` 和 `python -m rewindagent effect-serve`。命令有 `start`、`resume`、`reconcile`、`status`。`reconcile` 只核对，不提交新业务操作。服务只监听 loopback。详见 `docs/phase2b-contract.md`。
+
+## 回执身份核验
+
+`resolve_effect` 要求显式回执的 `logical_id` 与当前操作一致；缺失或错配返回 `safe_refusal / receipt_mismatch`，不查询、不提交、不发布。相同载荷不是跨操作复用回执的依据。

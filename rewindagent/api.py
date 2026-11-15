@@ -72,6 +72,7 @@ def _message(code: str) -> str:
         "conflicting_submit": "提交与已生效载荷冲突，未改写已有结果，也未发布正式结果。",
         "tool_not_callable": "工具实现不是可调用对象。",
         "effect_identity": "逻辑操作标识为空。",
+        "receipt_mismatch": "回执属于不同的逻辑操作，拒绝复用，也不提交新的效果。",
     }.get(code, "执行停止。没有更具体的已记录原因。")
 
 
@@ -481,6 +482,18 @@ def resolve_effect(view: EffectView, simulator: LocalEffectSimulator) -> Executi
     receipt = None if view.receipt is None else dict(view.receipt)
     if receipt is None:
         receipt = simulator.receipt(view.logical_id)
+    if receipt is not None and receipt.get("logical_id") != view.logical_id:
+        return _blank(
+            "safe_refusal",
+            "receipt_mismatch",
+            operation_ids=[view.logical_id],
+            evidence={
+                "logical_id": view.logical_id,
+                "receipt": copy.deepcopy(receipt),
+                "service_submits": 0,
+                "service_queries": 0,
+            },
+        )
     captured: dict[str, Any] = {"value": "unavailable"}
 
     def watched(logical_id: str) -> dict[str, Any]:

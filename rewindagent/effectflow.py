@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import time
 import uuid
 from dataclasses import dataclass
-from typing import Any, Mapping
+from typing import Any, Callable, Mapping
 
 from .canonical import semantic_hash
 from .effectsvc import CONTRACT_VERSION, SERVICE_ID
@@ -146,7 +147,8 @@ def _load(conn: sqlite3.Connection, run_id: str, logical_id: str) -> sqlite3.Row
 def _within_retention(row: sqlite3.Row, now_ms: int) -> bool:
     if not row["idempotent"]:
         return False
-    return now_ms - int(row["prepared_at_ms"]) <= int(row["retention_ms"])
+    age = now_ms - int(row["prepared_at_ms"])
+    return 0 <= age < int(row["retention_ms"])
 
 
 def _matches(row: sqlite3.Row, view: Mapping[str, Any]) -> bool:
@@ -166,7 +168,7 @@ def advance_effect(
     state: dict[str, Any],
     service: Any,
     boundary: Any,
-    now_ms: int,
+    now_ms: int | None,
     reconcile_only: bool,
 ) -> tuple[dict[str, Any], bool] | EffectStop:
     """Return updated slot state and whether the local step was already stored.
@@ -174,6 +176,9 @@ def advance_effect(
     A stop leaves the run open when the reason is unknown, and refuses when the
     receipt or payload is explicitly unacceptable.
     """
+    # Explicit now_ms is a deterministic test clock. Production retries must
+    # sample again after network calls and the persisted-attempt boundary.
+    clock_ms = (lambda: int(time.time() * 1000)) if now_ms is None else (lambda: now_ms)
     if service is None or service.service_id != step["service_id"]:
         return EffectStop("safe_refusal", "service_unregistered", {"logical_id": step["logical_id"]})
     if step["service_id"] != SERVICE_ID:
@@ -216,7 +221,7 @@ def advance_effect(
                 key,
                 _canon(payload),
                 digest,
-                now_ms,
+                clock_ms(),
             ),
         )
         conn.execute("COMMIT")
@@ -265,7 +270,7 @@ def advance_effect(
             "effect_not_found",
             {"logical_id": logical_id, "effect_state": "unknown", "query_status": "not_found"},
         )
-    if not row["idempotent"] or not _within_retention(row, now_ms):
+    if not row["idempotent"] or not _within_retention(row, clock_ms()):
         reason = "effect_unknown" if not row["idempotent"] else "retention_expired"
         _set_state(conn, row, "unknown", None)
         return EffectStop("unknown", reason, {"logical_id": logical_id, "effect_state": "unknown"})
@@ -277,7 +282,7 @@ def advance_effect(
         _set_state(conn, row, "unknown", None)
         return EffectStop("unknown", reason, {"logical_id": logical_id, "effect_state": "unknown"})
     if view is None:
-        return _retry_same_key(conn, run_id, row, step, state, service, boundary, payload)
+        return _retry_same_key(conn, run_id, row, step, state, service, boundary, payload, clock_ms)
     _set_state(conn, row, "unknown", None)
     return EffectStop("unknown", "effect_unknown", {"logical_id": logical_id, "effect_state": "unknown"})
 
@@ -294,10 +299,13 @@ def _first_submit(conn, run_id, row, step, state, service, boundary, payload):
     return _after_response(conn, run_id, row, step, state, response, boundary)
 
 
-def _retry_same_key(conn, run_id, row, step, state, service, boundary, payload):
+def _retry_same_key(conn, run_id, row, step, state, service, boundary, payload, clock_ms: Callable[[], int]):
     if row["attempt_count"] >= MAX_ATTEMPTS:
         return EffectStop("unknown", "attempt_budget_exhausted", {"logical_id": row["logical_id"]})
     _mark_attempt(conn, row, boundary)
+    if not _within_retention(row, clock_ms()):
+        _set_state(conn, row, "unknown", None)
+        return EffectStop("unknown", "retention_expired", {"logical_id": row["logical_id"], "effect_state": "unknown"})
     response = service.submit(_request(row, payload))
     return _after_response(conn, run_id, row, step, state, response, boundary)
 
