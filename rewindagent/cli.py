@@ -70,7 +70,8 @@ def main(argv: list[str] | None = None) -> int:
         print(
             "usage: python -m rewindagent demo | eval --out <new-file> | "
             "round2 --out <new-file> | inspect <record.json> | "
-            "durable run|resume|status|inspect ..."
+            "durable run|resume|status|inspect ... | "
+            "effect-serve ... | protocol-serve --fixture <file> --store <db> --ready <file>"
         )
         return 0
     if args[0] == "demo":
@@ -118,6 +119,8 @@ def main(argv: list[str] | None = None) -> int:
         return _durable_command(args[1:])
     if args[0] == "effect-serve":
         return _effect_serve(args[1:])
+    if args[0] == "protocol-serve":
+        return _protocol_serve(args[1:])
     print(f"unknown command {args[0]}", file=sys.stderr)
     return 2
 
@@ -136,6 +139,28 @@ def _load_operator_registry(module_name: str, attr: str):
     if not isinstance(value, list):
         raise ValueError("registry must be a list")
     return value
+
+
+def _protocol_serve(args: list[str]) -> int:
+    from .protocolsvc import serve
+
+    def flag(name: str) -> str | None:
+        if name not in args:
+            return None
+        index = args.index(name)
+        return args[index + 1] if index + 1 < len(args) else None
+
+    fixture = flag("--fixture")
+    store = flag("--store")
+    ready = flag("--ready")
+    if not fixture or not store or not ready:
+        print(
+            "usage: python -m rewindagent protocol-serve --fixture <file> --store <db> --ready <file>",
+            file=sys.stderr,
+        )
+        return 2
+    serve(Path(store), Path(fixture), Path(ready))
+    return 0
 
 
 def _effect_serve(args: list[str]) -> int:

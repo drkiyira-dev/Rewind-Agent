@@ -78,3 +78,9 @@ python -m rewindagent durable inspect --store task.sqlite --run-id demo
 ## 回执身份核验
 
 `resolve_effect` 要求显式回执的 `logical_id` 与当前操作一致；缺失或错配返回 `safe_refusal / receipt_mismatch`，不查询、不提交、不发布。相同载荷不是跨操作复用回执的依据。
+
+## Phase 3A：仅本地协议
+
+`rewindagent.agent` 提供 `start_agent`、`resume_agent`、`reconcile_agent`、`query_agent` 和 `inspect_agent`。当前只支持 `ResponsesConfig(mode="local_protocol_fixture", ...)`，使用固定非秘密测试凭据；真实模式被拒绝。公开入口不会从数据库导入工具或凭据。
+
+本轮纯工具必须使用空参数对象，其函数读取导入快照。回执与输入身份核验、预算、单效果槽和恢复限制见 [3A 契约](phase3a-contract.md)。`reconcile_agent` 不请求下一轮，也不新增业务 POST；它确认结果后，调用方仍需显式 resume 才能继续。查询和 inspect 只读，`published=False` 不是最终结果。

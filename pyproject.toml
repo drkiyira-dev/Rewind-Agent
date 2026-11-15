@@ -13,5 +13,8 @@ license-files = ["LICENSE", "NOTICE.md"]
 [project.scripts]
 rewindagent = "rewindagent.cli:console_main"
 
+[project.optional-dependencies]
+responses = ["openai==3.46.0", "httpx2==2.16.0"]
+
 [tool.setuptools.packages.find]
 include = ["rewindagent*"]

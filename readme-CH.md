@@ -2,13 +2,14 @@
 
 [English](README.md) | 简体中文
 
-实验性的 Python 恢复组件，研究结论保持 `engineering_packaging`。当前工程阶段已冻结，第三阶段没有开始。
+实验性的 Python 恢复组件，研究结论保持 `engineering_packaging`。第三阶段 A 只增加一个受限的 Responses 工具循环，不是新的 Agent 框架。后续阶段没有开始。
 
-三层能力分别是：
+四层能力分别是：
 
 - 进程内接口：`execute`、`recover`、`resolve_effect`，恢复记录只活在当前进程。
 - 纯计算持久恢复：单个本机 SQLite 工作库，进程被 SIGKILL 后由新进程继续已提交的纯计算步骤。
 - 受限 loopback 效果恢复：工作库与模拟追加服务库分开，只监听 `127.0.0.1`，依据回执与查询继续、拒绝或保持 `unknown`。
+- Responses 工具循环：一次只接受一个非流式 function call。模型响应先落库，然后才执行工具。已验证的是本地协议夹具，不是真实模型。契约见 `docs/phase3a-contract.md`。
 
 任务结果看 `status` 和 `published`；退出码 0 只表示命令正常返回。`unknown` 不等于成功，也不能推出外部效果未发生。未发布的候选槽不是正式结果。
 
@@ -20,7 +21,7 @@
 
 ## 范围与研究结论
 
-本轮只验证 macOS 26.6 arm64、Python 3.14.3、SQLite 3.53.4、本机磁盘和单存储文件单活动执行者。运行时只用标准库。Linux、Windows、其他 Python 版本、断电、分布式执行、真实外部服务均未验证。`py3-none-any` 是 wheel 标签，不是跨平台验收结论。
+本轮只验证 macOS 26.6 arm64、Python 3.14.3、SQLite 3.53.4、本机磁盘和单存储文件单活动执行者。核心包只用标准库。可选 extra `responses` 安装官方 OpenAI SDK，已核对的版本是 3.46.0。Linux、Windows、其他 Python 版本、断电、分布式执行、真实模型和真实外部服务均未验证。`py3-none-any` 是 wheel 标签，不是跨平台验收结论。
 
 在既有 42 个受控离线场景中，B4 与补齐常规检查的 B3+ 在预先指定的配对行为字段上未观察到差异。安全性来自共享检查，不来自恢复规划器。默认 `recover(..., profile="safety")` 使用常规安全路径；`profile="experiment"` 保留历史规划器。没有新的恢复规划算法、全局最优恢复证明、生产级 exactly-once、真实模型 Token 节省或任意第三方 API 自动恢复保证。`actual_model_calls = 0`。
 
@@ -44,7 +45,7 @@ python3 -m rewindagent eval --out "$run_dir/eval.json"
 python3 -m rewindagent round2 --out "$run_dir/round2.json"
 ```
 
-原交付的可移植套件为 82 项，无跳过；当前套件新增了本次边界修复的回归测试。测试需要允许本机 loopback 监听。所有测试产物默认写入独立临时目录；需要保留时设置 `REWIND_TEST_OUTPUT` 指向输出父目录，每次仍新建子目录。旧 `PHASE2A_WRITE` / `PHASE2B_WRITE` 回写开关已移除。
+当前完整套件为 136 项；安装 Responses 可选依赖后全部通过、无跳过。不安装可选依赖时，明确跳过 15 项 SDK 集成测试，其余核心和边界测试仍运行。原交付套件为 82 项。测试需要允许本机 loopback 监听。所有测试产物默认写入独立临时目录；需要保留时设置 `REWIND_TEST_OUTPUT` 指向输出父目录，每次仍新建子目录。旧 `PHASE2A_WRITE` / `PHASE2B_WRITE` 回写开关已移除。
 
 七份冻结原始证据由所有者决定保留本机，不在公开仓库和安装包中。有原始材料的本地工作区可另外运行：
 
@@ -74,7 +75,7 @@ py="$run_dir/install-env/bin/python"
 (cd "$run_dir" && env -u PYTHONPATH "$py" -m rewindagent demo)
 ```
 
-本轮构建使用上述版本，本机构建工具安装日志显示使用缓存；构建使用 `--no-isolation` 和已安装工具。没有验证无缓存新机器离线构建。新版 setuptools 的最低声明改为 77，以支持 SPDX 许可证元数据。运行时没有第三方依赖。
+本轮构建使用上述版本，本机构建工具安装日志显示使用缓存；构建使用 `--no-isolation` 和已安装工具。没有验证无缓存新机器离线构建。新版 setuptools 的最低声明改为 77，以支持 SPDX 许可证元数据。核心运行时没有第三方依赖；Responses 循环使用下文说明的可选依赖。
 
 wheel 只包含包及标准元数据；sdist 另包含测试、示例与文档。数据库、日志、原始结果、虚拟环境与本地构建副本均不分发。不要设置指向原源码的 `PYTHONPATH` 来冒充独立安装。
 
@@ -141,8 +142,68 @@ rm -rf -- "$run_dir"
 unset run_dir py service_pid service_url
 ```
 
+## 本地 Responses 工具循环
+
+现有 3A 每轮只接受一个普通 function call，先持久化响应再执行工具，保存输出后才请求下一轮。`unknown` 会停止循环；`reconcile` 只核对已有效果，不调用模型、不新增业务 POST。真实模式仍返回 `live_not_authorized`。本地 fixture 是明确标注的合成数据，不是真实模型记录。
+
+在仓库根目录运行下列示例。安装本地源码的可选依赖可能访问 PyPI，但运行流程只访问 loopback，不需要真实 API 密钥：
+
+```bash
+run_dir="$(mktemp -d "${TMPDIR:-/tmp}/rewind-agent.XXXXXX")"
+python3 -m venv "$run_dir/env"
+py="$run_dir/env/bin/python"
+"$py" -m pip install '.[responses]'
+"$py" -m rewindagent effect-serve \
+  --store "$run_dir/effect.sqlite" --profile P0 \
+  --ready "$run_dir/effect-ready.json" --retention-ms 60000 &
+effect_pid=$!
+"$py" -m rewindagent protocol-serve \
+  --fixture examples/data/agent_fixture.json \
+  --store "$run_dir/protocol.sqlite" \
+  --ready "$run_dir/protocol-ready.json" &
+protocol_pid=$!
+cleanup_3a() {
+  kill "$effect_pid" "$protocol_pid" 2>/dev/null || true
+  wait "$effect_pid" "$protocol_pid" 2>/dev/null || true
+}
+trap cleanup_3a EXIT
+"$py" - "$run_dir/effect-ready.json" "$run_dir/protocol-ready.json" <<'PY_READY'
+import json, pathlib, sys, time
+paths = [pathlib.Path(name) for name in sys.argv[1:]]
+for _ in range(200):
+    try:
+        [json.loads(path.read_text()) for path in paths]
+        break
+    except (FileNotFoundError, json.JSONDecodeError):
+        time.sleep(0.05)
+else:
+    raise SystemExit("local services did not become ready within 10 seconds")
+PY_READY
+effect_url="$( "$py" -c 'import json,sys; print(json.load(open(sys.argv[1]))["base_url"])' "$run_dir/effect-ready.json" )"
+protocol_url="$( "$py" -c 'import json,sys; print(json.load(open(sys.argv[1]))["base_url"])' "$run_dir/protocol-ready.json" )"
+"$py" examples/responses_agent.py start \
+  --store "$run_dir/agent.sqlite" --run-id demo \
+  --snapshot examples/data/agent_snapshot.json \
+  --protocol-url "$protocol_url" --effect-url "$effect_url"
+"$py" examples/responses_agent.py status --store "$run_dir/agent.sqlite" --run-id demo
+"$py" examples/responses_agent.py resume \
+  --store "$run_dir/agent.sqlite" --run-id demo \
+  --protocol-url "$protocol_url" --effect-url "$effect_url"
+"$py" examples/responses_agent.py reconcile \
+  --store "$run_dir/agent.sqlite" --run-id demo \
+  --protocol-url "$protocol_url" --effect-url "$effect_url"
+cleanup_3a
+trap - EXIT
+```
+
+正常流程发布 `summary.count=2`、`summary.total=7`，追加效果一次。可选依赖固定为 `openai==3.46.0`、`httpx2==2.16.0`；不依赖项目已发布到 PyPI。预算只在 `start` 时设定，恢复保留原预算并拒绝覆盖参数。
+
+Agent 协调锁在子任务交接期间持续持有；已有子任务结果必须匹配工作流、输入和工具身份才能采纳。新响应重复 call ID 会被拒绝；不同 call ID 可以复用同一授权槽的相同效果。纯工具只读取导入快照，不接受模型参数。不透明 reasoning 字段用于本地续接，`inspect` 隐藏其内容。`store=False` 不是提供方完全不保留数据的保证。
+
+检查完本次结果后可用 `rm -rf -- "$run_dir"` 清理仅由此示例创建的临时目录。没有调用真实模型、测量真实 Token、发布包或部署服务。
+
 ## 交付与许可证
 
 采用 [GNU GPL 第 3 版](LICENSE)，SPDX 标识 `GPL-3.0-only`；第三方阅读记录保留在 [NOTICE.md](NOTICE.md)。本轮不发布 PyPI 包、GitHub Release 或部署服务。
 
-本轮接管与验证范围见 [docs/CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md)，仓库候选文件及留存材料分类见 `artifacts/handoff-manifest.json`。没有 CI 配置或 CI 通过徽章。未接真实 Agent、LLM、MCP、邮件、支付或生产数据库，未进入第三阶段。
+本轮接管与验证范围见 [docs/CODEX_HANDOFF.md](docs/CODEX_HANDOFF.md)，仓库候选文件及留存材料分类见 `artifacts/handoff-manifest.json`。没有 CI 配置或 CI 通过徽章。未接 MCP、邮件、支付或生产数据库。第三阶段 A 是上面的受限 Responses 循环；真实模型验证没有执行。

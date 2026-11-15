@@ -442,6 +442,28 @@ def _init(conn: sqlite3.Connection) -> None:
     conn.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
 
 
+def prepare_store(store: Path) -> str | None:
+    """Create the durable schema when a file has no schema yet.
+
+    The caller must already hold the executor lock. An initialized store is
+    left unchanged. This does not create a run.
+    """
+    if store.exists() and store.stat().st_size > 0:
+        kind = _classify_file(store)
+        if kind == "ok":
+            return None
+        if kind != "store_uninitialized":
+            return kind
+    conn = _open(store, write=True)
+    try:
+        if _version(conn) == 0 and not _has_runs(conn):
+            _init(conn)
+    finally:
+        conn.close()
+    kind = _classify_file(store)
+    return None if kind == "ok" else kind
+
+
 def _insert_event(conn: sqlite3.Connection, run_id: str, kind: str, body: Mapping[str, Any]) -> None:
     payload = copy.deepcopy(dict(body))
     text = _canon(payload)

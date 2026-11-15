@@ -1,0 +1,66 @@
+{
+  "source": "synthetic_fixture_not_a_live_model",
+  "model": "fixture-responses-1",
+  "responses": [
+    {
+      "output": [
+        {
+          "type": "function_call",
+          "id": "fc_read",
+          "call_id": "call_read",
+          "name": "read_snapshot",
+          "arguments": "{}",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "output": [
+        {
+          "type": "reasoning",
+          "id": "rs_sum",
+          "summary": [],
+          "encrypted_content": "fixture-opaque-not-a-secret",
+          "status": "completed"
+        },
+        {
+          "type": "function_call",
+          "id": "fc_sum",
+          "call_id": "call_sum",
+          "name": "summarize",
+          "arguments": "{}",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "output": [
+        {
+          "type": "function_call",
+          "id": "fc_record",
+          "call_id": "call_record",
+          "name": "record_summary",
+          "arguments": "{\"summary_ref\":\"24f569712aa65958725b0ac9e1d09829554c37511f5125dfb6807c50c9dfc518\"}",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "output": [
+        {
+          "type": "message",
+          "id": "msg_final",
+          "role": "assistant",
+          "status": "completed",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "The summary was recorded once.",
+              "annotations": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

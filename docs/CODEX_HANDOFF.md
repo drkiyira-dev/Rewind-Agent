@@ -1,5 +1,7 @@
 # Codex 接管说明
 
+当前状态：所有者已授权完善现有 Phase 3A，但仅限本地模拟协议，真实模型调用仍被拒绝。下列早期接管段落是历史记录；最新范围见文末 2026-11-15 Phase 3A 更新及当前清单。
+
 本说明对应本轮有限收尾。研究结论保持 `engineering_packaging`，版本保持 0.1.0，第三阶段未开始。它不是后续扩建、发布包、部署或更改仓库设置的授权。
 
 ## 本轮事实与来源
@@ -77,3 +79,9 @@ demo、eval、round2 均本轮独立执行，退出码 0。round2 仍为 `engine
 The maintenance candidate is based on commit `bcc020faa02e21ecd14f97e947c78a8099a3fd01`. It tightens receipt identity, SQLite filename encoding, HTTP response handling and retry retention checks, and closes append-service resources on initialization failure. Public signatures and database schemas are unchanged; the research conclusion remains `engineering_packaging`.
 
 The owner workspace also contains separate, uncommitted Phase 3A work. The owner explicitly selected core maintenance and retention of that work. Those files and edits are outside this candidate and must not be staged with it. This delivered core still contains no Phase 3 integration. Original evidence remains local; the current maintenance validation is recorded in the handoff manifest and new local results.
+
+## 2026-11-15 Phase 3A local-only continuation
+
+The owner explicitly authorized continued work on the existing Phase 3A implementation after core maintenance commit `f2ad17531ac895b136150190c42eac08e3797979`. Earlier statements that phase 3 had not begun describe those earlier handoffs. The current delivery includes the bounded local Responses fixture loop and its tests; live mode is still refused. Research conclusion: `engineering_packaging`.
+
+This continuation validates the optional SDK in an isolated environment, protects the agent-to-child lock handoff, verifies child identity before adopting results, tightens stored-record and response checks, and closes fixture resources. It adds no provider integration beyond the existing local protocol subset. Original evidence and old Phase 3A logs remain unchanged. Current results live separately under `results/phase3a-maintenance/20261115/`; the manifest records the current tested candidate.
