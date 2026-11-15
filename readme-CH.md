@@ -45,7 +45,7 @@ python3 -m rewindagent eval --out "$run_dir/eval.json"
 python3 -m rewindagent round2 --out "$run_dir/round2.json"
 ```
 
-当前完整套件为 136 项；安装 Responses 可选依赖后全部通过、无跳过。不安装可选依赖时，明确跳过 15 项 SDK 集成测试，其余核心和边界测试仍运行。原交付套件为 82 项。测试需要允许本机 loopback 监听。所有测试产物默认写入独立临时目录；需要保留时设置 `REWIND_TEST_OUTPUT` 指向输出父目录，每次仍新建子目录。旧 `PHASE2A_WRITE` / `PHASE2B_WRITE` 回写开关已移除。
+当前完整套件为 148 项；安装 Responses 可选依赖后全部通过、无跳过。不安装可选依赖时，明确跳过 23 项 SDK 集成测试，其余核心和边界测试仍运行。原交付套件为 82 项。测试需要允许本机 loopback 监听。所有测试产物默认写入独立临时目录；需要保留时设置 `REWIND_TEST_OUTPUT` 指向输出父目录，每次仍新建子目录。旧 `PHASE2A_WRITE` / `PHASE2B_WRITE` 回写开关已移除。
 
 七份冻结原始证据由所有者决定保留本机，不在公开仓库和安装包中。有原始材料的本地工作区可另外运行：
 
@@ -145,6 +145,8 @@ unset run_dir py service_pid service_url
 ## 本地 Responses 工具循环
 
 现有 3A 每轮只接受一个普通 function call，先持久化响应再执行工具，保存输出后才请求下一轮。`unknown` 会停止循环；`reconcile` 只核对已有效果，不调用模型、不新增业务 POST。真实模式仍返回 `live_not_authorized`。本地 fixture 是明确标注的合成数据，不是真实模型记录。
+
+恢复在执行或采纳子任务前检查已保存的参数与子任务身份；不一致时返回 `record_corrupt`，不改写证据。崩溃留下需要写库回滚的 SQLite 日志时，`status` 和 `inspect` 返回 `unknown / store_recovery_required`，调用方应使用 `resume` 在执行锁保护下恢复。新增 SIGKILL 测试覆盖尚未提交的请求意图、已接受调用、效果输出、最终响应和发布，包括日志回滚与锁竞争。详见[边界覆盖与限制](docs/phase3a-contract.md#additional-recovery-boundaries)。
 
 在仓库根目录运行下列示例。安装本地源码的可选依赖可能访问 PyPI，但运行流程只访问 loopback，不需要真实 API 密钥：
 

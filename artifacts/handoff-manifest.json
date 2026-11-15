@@ -1,6 +1,6 @@
 {
   "schema": "rewindagent.handoff_manifest",
-  "round": "phase3a-local-20261115",
+  "round": "phase3a-boundaries-20261115",
   "engineering_status": "READY",
   "git_status": "VERIFIED",
   "delivery_status": "NOT_PUSHED",
@@ -10,14 +10,13 @@
   "license_status": "owner_selected_GPL-3.0-only",
   "license_source": "https://www.gnu.org/licenses/gpl-3.0.txt",
   "license_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
-  "prior_manifest_sha256": "8978cf38464ff6619a03d44000534c8d5aa04215b9173af75ae5afd1f622ea3b",
-  "prior_manifest_path": "results/phase3a-maintenance/20261115/prior/handoff-manifest.json",
+  "prior_manifest_sha256": "6cb3fc4eb2993fb922f3345f62e9c110d77a34d74d6e0285a943409a9ee969f8",
+  "prior_manifest_path": "results/phase3a-boundaries/20261115-ypap35p2/prior/handoff-manifest.json",
   "change_basis": [
-    "Owner explicitly authorized continued work on existing Phase 3A using local protocol fixtures only; no real model calls.",
-    "Review and include previously uncommitted Phase 3A sources, fixtures and tests. Preserve original local evidence.",
-    "Hold the coordinator lock through child handoff, verify existing child identity, reject repeated call IDs and inconsistent stored bindings.",
-    "Tighten response/endpoint validation, request opaque reasoning continuation, preserve budgets and close SDK/fixture resources on failure.",
-    "English and Chinese README retain equivalent local examples; no package-index publication is assumed."
+    "Owner requested missing recovery boundaries in existing Phase 3A; only local simulation, no real model calls.",
+    "Add 12 regressions for transaction SIGKILL rollback, hot journal recovery, executor contention, saved call damage and explicit retry budgets.",
+    "Refuse damaged saved calls before child execution/adoption without rewriting evidence; classify read-only SQLite rollback as store_recovery_required.",
+    "Keep runtime schema, trusted tool protocol, research conclusion and previous evidence unchanged."
   ],
   "self_hash": "not_included",
   "self_entry": {
@@ -28,7 +27,7 @@
   },
   "git": {
     "repository_root": ".",
-    "initial_state": "Existing main at f2ad17531ac895b136150190c42eac08e3797979; empty index; 17 existing uncommitted Phase 3A files authorized for this continuation.",
+    "initial_state": "Clean main at 3d8bd10e22f73228c297d697f92861054cc386cd, empty index; authorized public origin verified.",
     "target": "drkiyira-dev/Rewind-Agent",
     "requested_visibility": "public",
     "branch": "main",
@@ -39,14 +38,14 @@
     "active_hooks": 0,
     "configured_filters": 0,
     "github_workflows": 0,
-    "prior_history_scan": "Three existing commits remain unchanged. The new commit contains only the reviewed 3A continuation and matching documentation/manifest."
+    "prior_history_scan": "Existing four commits unchanged; only the reviewed boundary follow-up is to be pushed. Full reachable blob path/content scan repeated locally before commit."
   },
   "verification": {
-    "scope": "Current reviewed 3A candidate. SDK calls only target the synthetic local protocol service; live mode remains refused.",
-    "base_commit": "f2ad17531ac895b136150190c42eac08e3797979",
-    "source_sha256": "cf5c874f70a17e3c1cdc8d338f258fe6f68c7271665ab93e3f4a62b302e687f6",
+    "scope": "Existing Phase 3A local recovery boundary follow-up. No real model/provider requests.",
+    "base_commit": "3d8bd10e22f73228c297d697f92861054cc386cd",
+    "source_sha256": "3b222c0b5651c18337ca43857d49124874644d394c145a5cba129c82bc9a4a23",
     "source_digest_definition": "sorted relative path UTF-8 + NUL + content + NUL; manifest excluded",
-    "runtime_sha256": "ccf7ffda3c9fd6b2cd0aca0d48a90591d1aabea9d9e2d84a4eaaac7a660a2505",
+    "runtime_sha256": "75bc774cc936e0957146256863d404edd40b794b46caace4e1705c8d7c8b234d",
     "platform": "macOS-26.6-arm64-arm-64bit-Mach-O",
     "python": "3.14.3",
     "sqlite": "3.53.4",
@@ -54,7 +53,7 @@
     "http_client": "httpx2 2.16.0",
     "suites": [
       {
-        "tests": 117,
+        "tests": 136,
         "failures": 0,
         "errors": 0,
         "skipped": 0,
@@ -62,13 +61,13 @@
         "unexpected_successes": 0,
         "name": "baseline",
         "returncode": 0,
-        "children": 236,
+        "children": 235,
         "all_children_reaped": true,
         "all_streams_closed": true,
         "resource_warnings": 0
       },
       {
-        "tests": 136,
+        "tests": 148,
         "failures": 0,
         "errors": 0,
         "skipped": 0,
@@ -76,16 +75,16 @@
         "unexpected_successes": 0,
         "name": "final-suite",
         "returncode": 0,
-        "children": 235,
+        "children": 280,
         "all_children_reaped": true,
         "all_streams_closed": true,
         "resource_warnings": 0
       },
       {
-        "tests": 136,
+        "tests": 148,
         "failures": 0,
         "errors": 0,
-        "skipped": 15,
+        "skipped": 23,
         "expected_failures": 0,
         "unexpected_successes": 0,
         "name": "without-sdk",
@@ -96,21 +95,7 @@
         "resource_warnings": 0
       },
       {
-        "tests": 136,
-        "failures": 0,
-        "errors": 0,
-        "skipped": 0,
-        "expected_failures": 0,
-        "unexpected_successes": 0,
-        "name": "sdist-suite",
-        "returncode": 0,
-        "children": 235,
-        "all_children_reaped": true,
-        "all_streams_closed": true,
-        "resource_warnings": 0
-      },
-      {
-        "tests": 36,
+        "tests": 48,
         "failures": 0,
         "errors": 0,
         "skipped": 0,
@@ -118,60 +103,92 @@
         "unexpected_successes": 0,
         "name": "installed-suite",
         "returncode": 0,
-        "children": 86,
+        "children": 131,
         "all_children_reaped": true,
         "all_streams_closed": true,
         "resource_warnings": 0
       }
     ],
-    "new_regression_tests": 19,
-    "regression_proof": "17 new tests against pre-maintenance 3A: failed with 12 subtest failures and 9 errors; a separate baseline passed 117 tests.",
+    "new_regression_tests": 12,
+    "regression_proof": "Damaged call tests on pre-fix code: 5 subtest failures and 2 errors. Hot-journal test after verified spill: store_corrupt instead of store_recovery_required. Fixed regressions and complete suite passed. The initial hot-journal setup that did not force spill is retained as an unsuccessful test setup, not acceptance evidence.",
     "actual_provider_api_calls": 0,
     "actual_token_usage": 0,
     "live_model_validation": "NOT_RUN_NOT_AUTHORIZED",
-    "network_validation": "After dependency installation, both test environments block non-loopback DNS/socket connections. No violation recorded in final/source/sdist/installed tests. This validation hook is not packaged.",
-    "history_audits": {
-      "count": 3,
-      "passed": true,
-      "owner_local_originals": true
-    },
+    "network_validation": "After dependency setup both SDK environments block non-loopback DNS/socket connections; no violation recorded. Guard is local validation code, not packaged.",
     "original_evidence": {
-      "frozen_files": 7,
+      "retained_files": 344,
       "hashes_unchanged": true,
-      "previous_finalization_and_3a_files": 37,
-      "retained_local": true
+      "frozen_files": 7,
+      "historical_audits": "Not rerun in this follow-up; raw hashes independently rechecked."
     },
+    "prior_manifest_drift": [
+      {
+        "path": "rewindagent.egg-info/PKG-INFO",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "rewindagent.egg-info/SOURCES.txt",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "rewindagent/__pycache__/cli.cpython-314.pyc",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "rewindagent/__pycache__/durable.cpython-314.pyc",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "tests/__pycache__/test_durable_crash.cpython-314.pyc",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "tests/__pycache__/test_effect_crash.cpython-314.pyc",
+        "classification": "exclude",
+        "exists": true
+      },
+      {
+        "path": "tests/__pycache__/test_finalization.cpython-314.pyc",
+        "classification": "exclude",
+        "exists": true
+      }
+    ],
     "build": {
       "returncode": 0,
-      "mode": "PIP_NO_INDEX=1; no-isolation; initial wheel from sdist and independent clean-sdist rebuild",
-      "dependencies": "Fixed SDK/direct HTTP and build-tool versions; complete installed versions in local environment-lock.txt. Dependency setup permitted PyPI/cache; not a fresh-cache offline claim.",
+      "mode": "PIP_NO_INDEX=1, --no-isolation, current clean candidate wheel/sdist plus independent clean-sdist wheel rebuild",
+      "dependencies": "Previously verified exact dependency lock; setup allowed PyPI/cache. Not a fresh-cache offline build claim.",
       "artifacts": [
         {
           "name": "rewindagent-0.1.0-py3-none-any.whl",
-          "size": 89635,
-          "sha256": "defcf0b1a68dc9d6c9706d8d8f5d0daca8b2356c56c5b525ccb24f1e891564fe",
+          "size": 90304,
+          "sha256": "8e41d77e2a0d0039ec22411b0af8631ea15817db8e173352ed34364f5acec401",
           "members": 29,
           "paths_and_contents_scanned": true
         },
         {
           "name": "rewindagent-0.1.0.tar.gz",
-          "size": 170524,
-          "sha256": "a89e1b7c540d3d47bd76128ba7a8d55b330348ca90a225635c555a1a0476ea80",
-          "members": 86,
+          "size": 176364,
+          "sha256": "e926e6f5c2f724c2a1c21d441f2771831541dbce54a838fcc1d9bef24292f448",
+          "members": 87,
           "paths_and_contents_scanned": true
         }
       ],
-      "required_sdist_files_identical": true,
+      "sdist_required_sources_identical": true,
       "wheel_member_contents_identical": true,
-      "installed_wheel_sha256": "415bb13d76fd1fe5786c41abe692e2f45a49047a4c3c6599f2ad2d6a954d3928"
+      "installed_wheel_sha256": "31f7d2d42b275f43ac41e4a0ba4c8bfbaa3d56ae0873ca6a1d2cf43122113df5"
     },
     "installed": {
       "no_index": true,
       "no_deps": true,
-      "site_packages_import": true,
+      "import_from_site_packages": true,
+      "outside_source_tree": true,
       "runtime_source_on_pythonpath": false,
-      "fixture_only_directory": true,
-      "phase3a_tests": 36,
+      "phase3a_tests": 48,
       "skips": 0
     },
     "readme": {
@@ -180,16 +197,21 @@
         "Chinese"
       ],
       "relative_links_valid": true,
-      "local_command_blocks_identical": true,
-      "executed_flow": "start/status/resume/reconcile passed with one publication ID; reused independently installed wheel instead of repeating environment bootstrap"
+      "local_3a_blocks_identical": true,
+      "commands_unchanged": "Bootstrap/start/status/resume/reconcile blocks remain identical to previously executed version. Current installed tests independently exercise those operations."
     },
-    "candidate_file_count": 72,
+    "candidate_file_count": 73,
     "candidate_scan_findings": [],
-    "local_evidence_root": "results/phase3a-maintenance/20261115",
+    "local_evidence_root": "results/phase3a-boundaries/20261115-ypap35p2",
+    "remaining_limits": [
+      "No live model or billing validation",
+      "No power-loss/fsync-failure or network-filesystem claim",
+      "Bounded saved-record consistency checks, not authentication or arbitrary repair"
+    ],
     "previous_verification": {
-      "round": "core-maintenance-20261115",
-      "source_sha256": "3b7308c7b9f65aaf6d07e581cd9c8daf47ec2e84db9a3d77a0b0b67b1513d03d",
-      "manifest_sha256": "8978cf38464ff6619a03d44000534c8d5aa04215b9173af75ae5afd1f622ea3b"
+      "round": "phase3a-local-20261115",
+      "source_sha256": "cf5c874f70a17e3c1cdc8d338f258fe6f68c7271665ab93e3f4a62b302e687f6",
+      "manifest_sha256": "6cb3fc4eb2993fb922f3345f62e9c110d77a34d74d6e0285a943409a9ee969f8"
     }
   },
   "rules": [
@@ -239,7 +261,7 @@
       "sha256": "2ee44808f85faaabbd86739892fdf007ecef1ec5fca13757bd7da32518d1a3d7",
       "purpose": "ignore hints; not an upload whitelist",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "LICENSE",
@@ -247,7 +269,7 @@
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "MANIFEST.in",
@@ -255,7 +277,7 @@
       "sha256": "3f5d6dfbd4d4044c282cd6f83adeaccf3b3839204511897ee78e901d34025927",
       "purpose": "sdist file list",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "NOTICE.md",
@@ -263,15 +285,15 @@
       "sha256": "7ffc54c508a4115aa804a1756566c9b8190ecf5d1b2a747e2f5ec29c2ec6c67d",
       "purpose": "third-party notice; license not selected",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "README.md",
-      "size": 16367,
-      "sha256": "dbf4a7399df1bb50dea2e4c0a7e66751fcd61a9e4525b6123011f80ab71a4e87",
+      "size": 16987,
+      "sha256": "5c0a9c4476aaaa30e0e747da4f37eabc47b3f69648199638b56f54af53ab0935",
       "purpose": "Primary English README with link to Chinese version",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "build/lib/rewindagent/__init__.py",
@@ -411,19 +433,19 @@
     },
     {
       "path": "docs/CODEX_HANDOFF.md",
-      "size": 10544,
-      "sha256": "54d7072c1f61f4c76ef174d2a4ef0e017d641d5711db18b76508760741136fed",
+      "size": 12003,
+      "sha256": "0fa2f8cc259e4e87167135479d2504f6cda77d667aa15625bcba86691c9fcecf",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/api.md",
-      "size": 5125,
-      "sha256": "6e026b2354ca8ec8c7b296e90482c00c38941e4f98595821ccb699dea5d95562",
+      "size": 5607,
+      "sha256": "7448808c17271086d0efc48bae0fbac194854d1f14442f30266eb37ca66dc643",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/evaluation-plan.md",
@@ -431,7 +453,7 @@
       "sha256": "918db0d769585e2cb2b2749f57962745d01252f10f2fdee8c8fee0357a39ed2c",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/phase2a-contract.md",
@@ -439,7 +461,7 @@
       "sha256": "68961c3fd6e52d93e240f99b6a4d705889f4f1fb24c6343c7ff89b6cbff1cf9a",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/phase2b-contract.md",
@@ -447,15 +469,15 @@
       "sha256": "f5dd45295ecc35e9fe57b7ec0277840aaca33e14d6d4c8be927a836adc79919e",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/phase3a-contract.md",
-      "size": 5641,
-      "sha256": "ae78f2f7c6df940a7f773fb2702e94a4c9250f355a5b0f1f910d3cb7b4b19052",
+      "size": 8311,
+      "sha256": "ff8cf9b343f70837defb83ffce580bcf3e6f5afcf6bce81d3a966065ba2dd034",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/recovery-contract.md",
@@ -463,7 +485,7 @@
       "sha256": "f15f2dab0b46634cec3042466fc7e0502412610102f79a57943748c9e25b4737",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/review.md",
@@ -471,7 +493,7 @@
       "sha256": "fff3ecbba74f7c8780dfd9148c42e5ae87a24f65005f49ad7806fdacdfde46de",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "docs/round2-expectations.md",
@@ -479,7 +501,7 @@
       "sha256": "f5cc4cb3184e2c575078bdcf67c4617fbd15c24b5cfd9050f849329b8ed83441",
       "purpose": "contracts and handoff",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/__pycache__/durable_run.cpython-314.pyc",
@@ -495,7 +517,7 @@
       "sha256": "c161531f0548a797122b3a54e3158127dfe1a12c18b9c891342607ac23d258cd",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/agent_fixture.json",
@@ -503,7 +525,7 @@
       "sha256": "5513fb616e3c299482d1770efdf1133ffcbd4d835c7b5eb82b8949b5d9d29f64",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/agent_snapshot.json",
@@ -511,7 +533,7 @@
       "sha256": "b31568794d70362bb32cb92470933082e26e57e2126d8dd0d39b86e7d217181d",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/durable_boom.json",
@@ -519,7 +541,7 @@
       "sha256": "ebaabe9d5e0aa49289ff6c18344fc7ae1cd327151ef37156e0da2a5708bb397d",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/durable_effect.json",
@@ -527,7 +549,7 @@
       "sha256": "eb2dc926422c2a4b06e53f58295c24d67383aeebb4ec61ebc09360acabc37e9c",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/durable_snapshot_alt.json",
@@ -535,7 +557,7 @@
       "sha256": "fd2a03970cbd55dcc89db9bc451512af99849f5bc5b136d3425e2b962111aa98",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/durable_workflow.json",
@@ -543,7 +565,7 @@
       "sha256": "a8fc381f3dd1a98699b26028c8776d79a9d28776db7e627bc1f50e9d55da78ff",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/durable_workflow_alt.json",
@@ -551,7 +573,7 @@
       "sha256": "b98798bad4981c3af2b545e7edfd58644d9614ee56d4e4c490e981ba04a08cda",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/effect_snapshot.json",
@@ -559,7 +581,7 @@
       "sha256": "c1a75f24b4d3ec8ec85ef9c26ab5262c89cf094faa3a7ba27ec60372b41d42e2",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/effect_workflow.json",
@@ -567,7 +589,7 @@
       "sha256": "05e63a4f58c17b8f464515523d8ca05fd7195d8d91860b92b78d870cc4ece247",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/data/snapshot.json",
@@ -575,7 +597,7 @@
       "sha256": "aff536e0806213bd931dab541fa8fe020d2093742c89d608954a6bcdc128dae5",
       "purpose": "synthetic workflow fixtures",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/durable_run.py",
@@ -583,7 +605,7 @@
       "sha256": "69b467686c2c2ae224a8376c174391ec90f144737b067d15bc34d3107569a564",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/effect_run.py",
@@ -591,7 +613,7 @@
       "sha256": "3057bc2a7ed60df1f2760a10407584251427aa9ea49c577aa3a5f4a88046e5d9",
       "purpose": "caller examples",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "examples/responses_agent.py",
@@ -599,7 +621,7 @@
       "sha256": "29e5a346f3605bfb1dd8080fdbc3cbfb7acb30360c7e28aeab70002ef0071d80",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "pyproject.toml",
@@ -607,15 +629,15 @@
       "sha256": "fcfc0ca341b88d027eecfcef952e4e91523f7883ecec757cd74a758506272385",
       "purpose": "package metadata, version 0.1.0, no license field",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "readme-CH.md",
       "purpose": "Chinese README with link to the English version",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts.",
-      "size": 13712,
-      "sha256": "289a4ab3cea61fcc76f6209ae22d8f552b931e0324695cb21c8ebce8bb726142"
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only.",
+      "size": 14266,
+      "sha256": "d2647565006e0903283fd3e4518800743679bb9c2218c33349022f47f6eb6ab2"
     },
     {
       "path": "results/codex-handoff/20261107T224828-JST/affected/children-stderr.json",
@@ -2303,6 +2325,350 @@
       "prior_upload_class": "decision_required"
     },
     {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/affected.log",
+      "size": 6231,
+      "sha256": "b667e7f2e08b64245ec36a7290e60e965f016c287a7669cddd5012b5cf8b2dff",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/archive-scan.json",
+      "size": 540,
+      "sha256": "e79efdc09c38edbd95373866fad36af65d50e68104296122108917ced9641697",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline-files.json",
+      "size": 10673,
+      "sha256": "221364f9e78a66ea8d4661de354677b34b78764184b9192002882f32f2be4293",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline.log",
+      "size": 20653,
+      "sha256": "12244d608ea10cb0adf1eb99e4acffebbd567d071440397645d7a617c1a9c03e",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline/rewind-tests-ioka8dji/acceptance.json",
+      "size": 4184,
+      "sha256": "a4921811d3156e4a7bf95c17d2188ef7f5fd1ecc0493af4d32527a6d852a560d",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline/rewind-tests-ioka8dji/phase2a-crash-results.json",
+      "size": 3741,
+      "sha256": "d95b824ebd3443f23fc6ca4549bf538fcc7f4dbdc48e0533a363e0f1b41cf046",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline/rewind-tests-ioka8dji/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "766ae153843176f7fda14414993d0aa1901d0229e969510e166c7e0eb1201d85",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/baseline/test-results.json",
+      "size": 33165,
+      "sha256": "ea3d50e1d3426946483290d7acd9ea94e339916ae9a62c5e105211b1a66a4222",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/build.log",
+      "size": 17165,
+      "sha256": "9927f7b5e176bea40b6c71126efe9dcc72dd76ee54655201f09d9088905db8b6",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/candidate.json",
+      "size": 11720,
+      "sha256": "e8939baea2e104bf3834a61b4d064c276f64ea59aaab802ee0aecec4e038e59d",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/dependency-install.log",
+      "size": 4986,
+      "sha256": "f99d87e074a96828abf1dfd3353ca3bc8b524241b9c77cf0abdb6a54419cb452",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/dist/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 90304,
+      "sha256": "8e41d77e2a0d0039ec22411b0af8631ea15817db8e173352ed34364f5acec401",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/dist/rewindagent-0.1.0.tar.gz",
+      "size": 176364,
+      "sha256": "e926e6f5c2f724c2a1c21d441f2771831541dbce54a838fcc1d9bef24292f448",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/environment-lock.txt",
+      "size": 317,
+      "sha256": "e9da8627c6d86469cabc276a34c5f0056ea84b63eb1c7dd0bccf539cdd5867a2",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/final-suite.log",
+      "size": 22853,
+      "sha256": "b66cc4a9a75218259a70c2b0d1239a7cef47c9ca586f1fa15a9738ece585b1ef",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/final-suite/rewind-tests-l69wbwkf/acceptance.json",
+      "size": 4184,
+      "sha256": "5072784707d3d86b9d07647695aa909425553267eb95c2a696e017753fd24158",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/final-suite/rewind-tests-l69wbwkf/phase2a-crash-results.json",
+      "size": 3741,
+      "sha256": "fc9a6fb104d6a063d4fd9649c1ba1a3685a0287395f5bea7f3c1a5be9bcc6fb2",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/final-suite/rewind-tests-l69wbwkf/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "6ec609594a8ad44156bb7b437379f692718bf626113e228b17dc70c97fd8f6c3",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/final-suite/test-results.json",
+      "size": 39491,
+      "sha256": "3f8060d6d2e0c58ebc3dda1c8a24685347decf6498dfae691eef949a5d7c7dad",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/history-scan.json",
+      "size": 330,
+      "sha256": "7fb3bf0083f6c6bc95906dc3b57c2dd4b895588c9a76fd9bd6e078c5f5eae0d7",
+      "purpose": "Read-only reachable history and candidate scan",
+      "upload_class": "local_only",
+      "classification_reason": "Full verification records stay local under owner authorization."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/hot-journal-before-spill.log",
+      "size": 1058,
+      "sha256": "3cb75c79d9ac1be827c02e12a4986ed0316768ab7f8864544fc6c87663f9abe0",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/hot-journal-before.log",
+      "size": 1029,
+      "sha256": "8808ad3ac4666d978d8a5a07fdcbde19b9bc371a4d9b5863f3c4a5bc49f2084c",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/installed-dependencies.log",
+      "size": 4986,
+      "sha256": "f99d87e074a96828abf1dfd3353ca3bc8b524241b9c77cf0abdb6a54419cb452",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/installed-suite.log",
+      "size": 8061,
+      "sha256": "6dd02058e25e2e26ab343cae8f3a9e0608040e08a932570dcc7a5afa267f0d89",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/installed-suite/test-results.json",
+      "size": 18563,
+      "sha256": "a39477081e8c9e272eeaa54eb6ef1273b4df346549f942595eba31aa5b9f5053",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/original-evidence.json",
+      "size": 66298,
+      "sha256": "f992d11488fad8562e6cf56ffc34b6011ae65ff553b087d52cf0d3d4c20fd789",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/preflight.json",
+      "size": 1072,
+      "sha256": "cd29ef43a4dcf0212cc3b670f7bb60b8b14e8a1b82978aea0d59aa991ad5ef97",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/prior/handoff-manifest.json",
+      "size": 176195,
+      "sha256": "6cb3fc4eb2993fb922f3345f62e9c110d77a34d74d6e0285a943409a9ee969f8",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/rebuilt/rewindagent-0.1.0-py3-none-any.whl",
+      "size": 90304,
+      "sha256": "31f7d2d42b275f43ac41e4a0ba4c8bfbaa3d56ae0873ca6a1d2cf43122113df5",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/regression-after.log",
+      "size": 650,
+      "sha256": "4d46c0fa6d5de7d009de46354be6ffe78df6c1aecd46bf4e8e6f8d46b494f1fa",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/regression-before.log",
+      "size": 9721,
+      "sha256": "64b315fc0f5dc05b717fb3ceb0a8a15758bf1e20c1b4bf148166f77169e28982",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/sdist-rebuild.log",
+      "size": 8454,
+      "sha256": "bdb8f227be8b852a753477305bb1bf168ef78f4677c23ad4a6f9f8090e67efbf",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/validation-scripts/check_archives.py",
+      "size": 1957,
+      "sha256": "7d34fad8a3afd0f94c507c11e82e8874f9cd72f47158e55920a0055d11d9417e",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/validation-scripts/local-network-tripwire.py",
+      "size": 924,
+      "sha256": "639d63cd6fe1c52a72775e61baa7566d62bf29121b30096b6f1d7d90a877d029",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/validation-scripts/run_installed.py",
+      "size": 2045,
+      "sha256": "02ae75c42d610a6016be2247c69d0b5bc0387c5eba29065c7870dc0da08f229e",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/validation-scripts/run_suite.py",
+      "size": 1795,
+      "sha256": "82822795913a0004ac0585694b08b5d5b61ff0c731e89917cea2a57435e3d72d",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/validation-scripts/update_manifest.py",
+      "size": 6707,
+      "sha256": "3c37b70072b07d3856f06f0775c671d218570d65309b40cd13ff43ee2337e1e4",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/wheel-install.log",
+      "size": 179,
+      "sha256": "e2849ac37ff7b5fe10d28002bc02f9cc7c4016b5fe7cc0d141b0c86069a19e52",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/without-sdk.log",
+      "size": 23992,
+      "sha256": "e56445d861b2341c9d85764d4f930027a741bf7a8f79cfcf4bf9de2141d45c05",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/without-sdk/rewind-tests-8cswxdu6/acceptance.json",
+      "size": 4184,
+      "sha256": "0e6215dc27d85c236ba4c4d9d0145ee002be34163a39e6118f8c4a1dc291f930",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/without-sdk/rewind-tests-8cswxdu6/phase2a-crash-results.json",
+      "size": 3741,
+      "sha256": "01232e65220d3dd596d4c8ac97ad5bac0aeae8ed966f7de098ae1a9bafbbc6b6",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/without-sdk/rewind-tests-8cswxdu6/phase2b-crash-results.json",
+      "size": 1411,
+      "sha256": "7669fac307b6a96ed6dfc93812f58385472486aaa61cdc8ee57b0e2c69b25bef",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2/without-sdk/test-results.json",
+      "size": 21350,
+      "sha256": "b16dc6af532516f2edf6d32b8e4b616446a5f3e20c4d929957939cc11cad535e",
+      "purpose": "Local Phase 3A boundary validation evidence",
+      "upload_class": "local_only",
+      "classification_reason": "Owner keeps full logs, build products and original evidence local."
+    },
+    {
       "path": "results/phase3a-maintenance/20261115/archive-scan-before-doc-correction.json",
       "size": 540,
       "sha256": "d6a7274df49651b1d327ff07bedf0e666f0adc28fa38bac9457b1638b752dc4a",
@@ -2745,19 +3111,19 @@
     },
     {
       "path": "rewindagent.egg-info/PKG-INFO",
-      "size": 13429,
-      "sha256": "8ba87e524eaf5acc681e1031964d4e9cac50b25e67473fe668935986e10ba292",
+      "size": 14255,
+      "sha256": "7bc92d3c8b0dcbea6a7665770f789340a7f3b6ae8cba64d614e3bec68ee763f6",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "rewindagent.egg-info/SOURCES.txt",
-      "size": 1298,
-      "sha256": "82bb0c5248f2ce55ccbea395ae1860ab541ce9c157e68361796f0d066780010f",
+      "size": 1828,
+      "sha256": "729b21b72e92ac0dd50fa2d53f27fd953025db1e6b1ecc64e615c1a5e2998754",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "rewindagent.egg-info/dependency_links.txt",
@@ -2789,7 +3155,7 @@
       "sha256": "4e922e62e67e2f650f55eb419109958c17a7bd3a2e2041174ac6aac21e572ff8",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/__main__.py",
@@ -2797,7 +3163,7 @@
       "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/__pycache__/__init__.cpython-314.pyc",
@@ -2841,11 +3207,11 @@
     },
     {
       "path": "rewindagent/__pycache__/cli.cpython-314.pyc",
-      "size": 14303,
-      "sha256": "432c63a6a080a92d3813a3438cf3d0d7d8270ff54272414c0def2103e2493714",
+      "size": 15657,
+      "sha256": "2dfc51d2698223ac421a2d6ab2d2790e3ec9bf67f71e8b36f6ee3bb2ba26f4ce",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "rewindagent/__pycache__/diagnose.cpython-314.pyc",
@@ -2857,11 +3223,11 @@
     },
     {
       "path": "rewindagent/__pycache__/durable.cpython-314.pyc",
-      "size": 59943,
-      "sha256": "3ce7a85e1afd305f2d03f12dbcca212bf507f00d3bfa1a116a6747ebe6c2a6fe",
+      "size": 61028,
+      "sha256": "fab705cce0ee2f109544d653868b0f43adf2a4f816854e9305ff1a69789a1df3",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "rewindagent/__pycache__/effectflow.cpython-314.pyc",
@@ -2941,7 +3307,7 @@
       "sha256": "360bf9980e018b768c91ab16722df6c2f691d9e968cc8d6d1d5ca2b6cafd6795",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/adapters/openai_responses.py",
@@ -2949,15 +3315,15 @@
       "sha256": "47fe736f2393f642b1e111c7b0eef6f66a07fa871300dc483028b775fb247eb4",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/agent.py",
-      "size": 44921,
-      "sha256": "4f7d812057f0547dafbf6b9720b403b7de5e2a7dc8b7a5d593af89b4d2704f0f",
+      "size": 46501,
+      "sha256": "7e9b767cd5d62d5398885f4261543fb62bee42ef526b0e32dab7ab4b327c60ad",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/agent_store.py",
@@ -2965,7 +3331,7 @@
       "sha256": "7635784123774828faa5f5e460ea7838011e5db5de1cfb2f885d2ab1a6d7dd90",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/api.py",
@@ -2973,7 +3339,7 @@
       "sha256": "d7a54b2410ec533eafeccac021e6d0ffe6fccce5f0153e2337f765fbd04f7b94",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/canonical.py",
@@ -2981,7 +3347,7 @@
       "sha256": "5d1dd7f66be9c7ed4c8431f57939bb706efbad5a3c6e85f03ea4850614795046",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/cases.py",
@@ -2989,7 +3355,7 @@
       "sha256": "c11255a61f662e6b5f9349e333a5ac19c169246a18e98054516f2dcdd22c5e9e",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/cli.py",
@@ -2997,7 +3363,7 @@
       "sha256": "f72d856a0993a0a182bd25591c4910f6fce54533b42a793556f703a5420dc601",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/diagnose.py",
@@ -3005,7 +3371,7 @@
       "sha256": "c3451eee08ca761c6df0680a4f8704cf201741ace5a2924853c729c3616ed692",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/durable.py",
@@ -3013,7 +3379,7 @@
       "sha256": "d5211f7877bff44443480495b368cd6661d112b275e65e5b0d24376a4478c2d9",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/effectflow.py",
@@ -3021,7 +3387,7 @@
       "sha256": "91b785c006329412aadc1a075d433f5fc89bcacf825c2872094bf6709838dd66",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/effects.py",
@@ -3029,7 +3395,7 @@
       "sha256": "aa4999f8f90b51079bbaf8598a4469667945e37c486e240c5846169c29348e35",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/effectsvc.py",
@@ -3037,7 +3403,7 @@
       "sha256": "72b3909963c6b045354092254eeec4e977b85eed994339ccbe6bc733e4a4555a",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/engine.py",
@@ -3045,7 +3411,7 @@
       "sha256": "0e2ea75eea60adfd63020eca3b4ff6ea9f38ab9cfd33de69b023c84562126389",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/evaluate.py",
@@ -3053,7 +3419,7 @@
       "sha256": "9351ee171269de753115ec844d9d6fdf4fcc2599adc1df1d46122affc5c63d53",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/model.py",
@@ -3061,7 +3427,7 @@
       "sha256": "edc4d56a15a336550ee32cd890c1fb7cfe2654eff2bf906bb2756ac5885f3151",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/protocolsvc.py",
@@ -3069,7 +3435,7 @@
       "sha256": "8dd6e3c1d9383a3869cfa6401c6ed86ece851dc96f44ebc939b6c60336bdebaf",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/reference.py",
@@ -3077,7 +3443,7 @@
       "sha256": "ed52ba4f70485f732d6a176c6cfe25e889287dcf961648a159f56a533977fd4c",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/round2.py",
@@ -3085,7 +3451,7 @@
       "sha256": "25580fc63cbc31c368aab5c0cde495367c804e8a71a6e3383a326166a35b065e",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "rewindagent/verify.py",
@@ -3093,7 +3459,7 @@
       "sha256": "158bdc101094e40b5f8676b8ad57bdc52a30cdc49643dac25031c1fd24d2f6a8",
       "purpose": "package source",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/__init__.py",
@@ -3101,7 +3467,7 @@
       "sha256": "3195de7cfc8e24446c21b2cf3e2cf2b6764deef832af48282394789bce27ef32",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/__pycache__/__init__.cpython-314.pyc",
@@ -3129,27 +3495,27 @@
     },
     {
       "path": "tests/__pycache__/test_durable_crash.cpython-314.pyc",
-      "size": 43402,
-      "sha256": "3ae119ac78170eea486e2e6fe300f99624d882ed281b6f8d61c270b2209f4235",
+      "size": 43440,
+      "sha256": "0b68910d23cc1ffde4497a51570394dbef4a033a0ad78351897ceb08c08b5305",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "tests/__pycache__/test_effect_crash.cpython-314.pyc",
-      "size": 47804,
-      "sha256": "cc3373be3b2b61a939c37fa437d4904ab47ab1bffe93c4068a4400fa3f5b584b",
+      "size": 47842,
+      "sha256": "835c0dab26770a3393ccbd9ad8362018efee75e3566d84a662f3cda92e336978",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "tests/__pycache__/test_finalization.cpython-314.pyc",
-      "size": 33394,
-      "sha256": "a6b7c3cf8ae778cdd63bcbbe97826a4d71c7c8c448ca653671e5f8513b66a03e",
+      "size": 33432,
+      "sha256": "fdff45a27cadd6be467f54f22cc9cadc41ee5141596a311ba9e727e18d25887a",
       "purpose": "Generated local build/runtime/system file",
       "upload_class": "exclude",
-      "classification_reason": "Not source for delivery; retained locally and never staged."
+      "classification_reason": "Regenerated local build/bytecode file; excluded from submission. Current local hash recorded."
     },
     {
       "path": "tests/__pycache__/test_process_cleanup.cpython-314.pyc",
@@ -3192,12 +3558,20 @@
       "classification_reason": "Not source for delivery; retained locally and never staged."
     },
     {
+      "path": "tests/agent_transaction_worker.py",
+      "size": 3228,
+      "sha256": "76df528b5a102cdc12f43fa7aef70d5e1809d973eac1b0591d8d373529a16cb8",
+      "purpose": "Test-only SIGKILL worker for agent transaction recovery",
+      "upload_class": "include",
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
+    },
+    {
       "path": "tests/history_audit.py",
       "size": 2742,
       "sha256": "5b4af1bd5ef20700e81057ef075e70aa6cdfa3d6ee2fbbc27909b3ddb42e4ec9",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/process_support.py",
@@ -3205,15 +3579,15 @@
       "sha256": "8df34bcbd3ff24ce13cace9f49ed375cb800a3eb24dbd9086b2b77b73d7ce03c",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_agent_boundaries.py",
-      "size": 13664,
-      "sha256": "901fd1c01de9c6bcdecbac8e14630d992a9639e5a6afa4eb53480f517f23c922",
+      "size": 19727,
+      "sha256": "8ea8baf3d76f63d077f57972cd31a266ca7303eec293683dbcd6c4646d0a9882",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_agent_import.py",
@@ -3221,15 +3595,15 @@
       "sha256": "3862a9c684dad4a7646eb66bb5fac7cc3ae9dfbbd08f4cbc1f7287496f71a0e7",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_agent_recovery.py",
-      "size": 20928,
-      "sha256": "e69f7836da6e5416acf34da8897c11a35ca37d713277db23ef315f59819f1912",
+      "size": 30169,
+      "sha256": "bb7985a4a9ee516fd914ffde3e9ebd179e2ec58169e43ad61ded597ae4da4521",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_append_client.py",
@@ -3237,7 +3611,7 @@
       "sha256": "e2df6afee5096ae4babf7574ac60ad78e9201455fe53ba819a2e479081e41272",
       "purpose": "Core recovery boundary regression test",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_durable_crash.py",
@@ -3245,7 +3619,7 @@
       "sha256": "a7995d9b081d4d22cec4a1367f66a40fbbc7241b3ff68b40de062230dbdaed25",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_effect_crash.py",
@@ -3253,7 +3627,7 @@
       "sha256": "3ff4d80cf2f433f624b4a291b873fb3ac3a57f2d341367d1105a8816bc291a4f",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_effect_retention.py",
@@ -3261,7 +3635,7 @@
       "sha256": "7468858465e174aa116ae5bcbc88ca6aedb5dc70693dc48120d9814dd60ddd8d",
       "purpose": "Core recovery boundary regression test",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_finalization.py",
@@ -3269,7 +3643,7 @@
       "sha256": "27fd82beb65894deec61ff148200ed99147212c94a8143e9173832a19e2a3fb8",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_process_cleanup.py",
@@ -3277,7 +3651,7 @@
       "sha256": "30fee92c6d67419a7d13e04e04a0930ed22f26f3da12e7077aac1af644f12463",
       "purpose": "project license or portable test support",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_properties.py",
@@ -3285,7 +3659,7 @@
       "sha256": "8a4c34e3e991f71a4ac71db658227c892dc7101f8c5c2a25878a6dfe655a89a8",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_protocol_cleanup.py",
@@ -3293,7 +3667,7 @@
       "sha256": "fa1d255437df723c40c58ae5ac8967ca6d228bf4e60d9ff0c9ec68f0df48b745",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_public_api.py",
@@ -3301,7 +3675,7 @@
       "sha256": "9764e058bcda43b8c8939cd1e2984338847ad667c9a0715016fd2dcddb2763e4",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_recovery_boundaries.py",
@@ -3309,7 +3683,7 @@
       "sha256": "88a02bce7c3a172d1bc9bd8711541b873b47cf4df8b6a218374078295d49111a",
       "purpose": "Core recovery boundary regression test",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_responses_adapter.py",
@@ -3317,7 +3691,7 @@
       "sha256": "97e9c1f1985ae1fe06ab97b390baf48107ba1ceed63b263024331acf35444700",
       "purpose": "Reviewed local Phase 3A implementation, documentation or regression fixture",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_round2.py",
@@ -3325,7 +3699,7 @@
       "sha256": "3457fe3165e504f1d4dc38c702c7b590b9efd8c10aef39b7a4e6c5ca61f4a182",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     },
     {
       "path": "tests/test_targeted.py",
@@ -3333,8 +3707,15 @@
       "sha256": "4f0c02c631225c757db181ce95af11f577b313a46941e05bbc8f1d953b2b5f75",
       "purpose": "tests",
       "upload_class": "include",
-      "classification_reason": "Owner authorized local-protocol Phase 3A continuation; source/test/doc content reviewed. Fixtures are synthetic, not live model transcripts."
+      "classification_reason": "Reviewed source/tests/docs within owner-authorized local-only Phase 3A scope. Synthetic fixture data only."
     }
   ],
-  "phase3_scope": "Existing bounded Responses loop, local protocol fixture only; live mode refuses. No later phase started."
+  "phase3_scope": "Existing bounded Responses loop, local protocol fixture only; live mode refuses. No later phase started.",
+  "local_evidence_roots": [
+    {
+      "path": "results/phase3a-boundaries/20261115-ypap35p2",
+      "upload_class": "local_only",
+      "classification_reason": "Includes the enumerated logs/builds and later Git receipt/verification logs generated after this pre-commit manifest. No contents under this root are authorized for upload."
+    }
+  ]
 }

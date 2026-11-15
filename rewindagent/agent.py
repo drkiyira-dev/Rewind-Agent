@@ -89,6 +89,7 @@ def _message(code: str) -> str:
         "open": "会话尚未发布。",
         "duplicate_call_id": "新响应重复了已经接受的 call_id，未执行工具。",
         "record_corrupt": "会话记录未通过一致性检查，没有继续执行。",
+        "store_recovery_required": "存储有待回滚的崩溃日志；只读查询未改库。请用 resume 获取执行锁后恢复。",
     }.get(code, "Agent 会话停止。")
 
 
@@ -315,7 +316,11 @@ def query_agent(store: Path, run_id: str) -> AgentResult:
         return _result("not_applicable", "session_not_found", run_id)
     try:
         conn = connect(store, write=False)
-    except sqlite3_error():
+    except sqlite3_error() as exc:
+        if getattr(exc, "sqlite_errorname", None) == "SQLITE_READONLY_ROLLBACK":
+            # Read-only status must not recover a hot journal behind an active
+            # writer's back. The normal locked write path performs recovery.
+            return _result("unknown", "store_recovery_required", run_id)
         return _result("execution_failure", "store_corrupt", run_id)
     try:
         state = schema_state(conn)
@@ -338,7 +343,7 @@ def query_agent(store: Path, run_id: str) -> AgentResult:
 def inspect_agent(store: Path, run_id: str) -> dict[str, Any]:
     result = query_agent(store, run_id)
     body = result.to_dict()
-    if result.reason_code in {"record_corrupt", "store_corrupt", "schema_incomplete", "unknown_format"}:
+    if result.reason_code in {"record_corrupt", "store_corrupt", "store_recovery_required", "schema_incomplete", "unknown_format"}:
         return body
     if not store.exists():
         return body
@@ -671,6 +676,29 @@ def _child_for(conn, row, tool: AgentTool, arguments: dict[str, Any], seq: int) 
     return child, None
 
 
+def _call_problem(row, call, tool) -> str | None:
+    """Validate the saved call before handing its identity to the child kernel."""
+    if call is None or tool is None:
+        return "record_corrupt"
+    try:
+        arguments = parse_arguments(call["arguments_json"], tool.parameters)
+        if isinstance(arguments, str) or semantic_hash(arguments) != call["arguments_digest"]:
+            return "record_corrupt"
+        if tool.kind == "effect":
+            expected = f"{row['run_id']}.effect"
+            if row["effect_child_id"] != expected or arguments.get("summary_ref") != row["summary_ref"]:
+                return "record_corrupt"
+        else:
+            # Only the latest serial call can be pending; its ordinal is fixed
+            # in the same transaction as the accepted call.
+            expected = f"{row['run_id']}.p{row['tool_calls']}"
+        if call["child_run_id"] != expected:
+            return "record_corrupt"
+    except (TypeError, ValueError, KeyError, RecursionError):
+        return "record_corrupt"
+    return None
+
+
 def _settle_call(store, holder, lock, run_id, tools, services, boundary, *, unknown_only: bool):
     conn = holder[0]
     call = conn.execute(
@@ -681,12 +709,10 @@ def _settle_call(store, holder, lock, run_id, tools, services, boundary, *, unkn
         """,
         (run_id,),
     ).fetchone()
-    if call is None:
-        return _stop(conn, run_id, "execution_failure", "protocol_error")
-    if semantic_hash(json.loads(call["arguments_json"])) != call["arguments_digest"]:
-        return _stop(conn, run_id, "execution_failure", "record_corrupt")
-    tool = next(item for item in tools if item.name == call["name"])
     row = load_session(conn, run_id)
+    tool = next((item for item in tools if call is not None and item.name == call["name"]), None)
+    if _call_problem(row, call, tool):
+        return _result("execution_failure", "record_corrupt", run_id, phase=row["phase"])
     conn.close()
     lock.release_executor()
     try:
@@ -852,7 +878,9 @@ def _reconcile(store, holder, lock, run_id, tools, services, row) -> AgentResult
     ).fetchone()
     if call is None:
         return _result("not_applicable", "reconcile_idle", run_id, phase=row["phase"], evidence=_evidence(row, None))
-    tool = next(item for item in tools if item.name == call["name"])
+    tool = next((item for item in tools if item.name == call["name"]), None)
+    if _call_problem(row, call, tool):
+        return _result("execution_failure", "record_corrupt", run_id, phase=row["phase"])
     conn.close()
     lock.release_executor()
     try:

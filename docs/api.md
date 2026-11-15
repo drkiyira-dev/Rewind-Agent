@@ -84,3 +84,5 @@ python -m rewindagent durable inspect --store task.sqlite --run-id demo
 `rewindagent.agent` 提供 `start_agent`、`resume_agent`、`reconcile_agent`、`query_agent` 和 `inspect_agent`。当前只支持 `ResponsesConfig(mode="local_protocol_fixture", ...)`，使用固定非秘密测试凭据；真实模式被拒绝。公开入口不会从数据库导入工具或凭据。
 
 本轮纯工具必须使用空参数对象，其函数读取导入快照。回执与输入身份核验、预算、单效果槽和恢复限制见 [3A 契约](phase3a-contract.md)。`reconcile_agent` 不请求下一轮，也不新增业务 POST；它确认结果后，调用方仍需显式 resume 才能继续。查询和 inspect 只读，`published=False` 不是最终结果。
+
+若 SQLite 返回 `SQLITE_READONLY_ROLLBACK`，`query_agent` / `inspect_agent` 返回 `status="unknown"`、`reason_code="store_recovery_required"`，不改库，也不将其误报为损坏。调用方使用 `resume_agent` 获取执行锁并触发 SQLite 回滚；恢复后的阶段仍按已提交记录决定。无有效回执或响应时依旧保持 unknown。损坏的已保存参数或不一致的子任务绑定在恢复执行前返回 `record_corrupt`，原始记录保留。

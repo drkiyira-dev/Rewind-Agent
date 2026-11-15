@@ -61,6 +61,28 @@ class AgentBoundaryTests(unittest.TestCase):
         self.assertEqual(result.evidence["tool_calls"], 15)
         self.assertFalse(result.published)
 
+    def test_uncertain_attempts_exhaust_the_saved_retry_budget(self):
+        with patch.object(agent, 'create_response', return_value={'ok': False}) as request:
+            first = self.start(budgets=agent.AgentBudgets(max_model_attempts=2))
+            held = resume_agent(self.store, 'demo', tools(), PROVIDER)
+            self.assertEqual(first.reason_code, 'model_request_unknown')
+            self.assertEqual(held.reason_code, 'model_request_unknown')
+            self.assertEqual(request.call_count, 1)
+            retried = resume_agent(self.store, 'demo', tools(), PROVIDER, authorize_model_retry=True)
+            self.assertEqual(retried.reason_code, 'model_request_unknown')
+            self.assertTrue(retried.warnings)
+            exhausted = resume_agent(self.store, 'demo', tools(), PROVIDER, authorize_model_retry=True)
+            self.assertEqual(exhausted.reason_code, 'budget_exhausted')
+            self.assertFalse(exhausted.published)
+            self.assertEqual(request.call_count, 2)
+        conn = connect(self.store, write=False)
+        try:
+            attempts = conn.execute('SELECT attempt_seq, state, response_json FROM agent_attempts ORDER BY attempt_seq').fetchall()
+            self.assertEqual([tuple(row) for row in attempts], [(1, 'may_have_sent', None), (2, 'may_have_sent', None)])
+            self.assertEqual(conn.execute('SELECT COUNT(*) FROM agent_calls').fetchone()[0], 0)
+        finally:
+            conn.close()
+
     def test_resume_cli_refuses_budget_overrides_before_opening_store(self):
         from examples.responses_agent import main
         from contextlib import redirect_stderr
@@ -106,6 +128,88 @@ class AgentBoundaryTests(unittest.TestCase):
             count = conn.execute("SELECT COUNT(*) FROM agent_items WHERE kind='function_call_output'").fetchone()[0]
         conn.close()
         self.assertEqual(count, 1)
+
+    def test_executor_contention_after_child_commit_leaves_one_pending_adoption(self):
+        from rewindagent.durable import _Lock
+        blocker = _Lock(Path(str(self.store) + '.lock'))
+        self.addCleanup(blocker.release)
+        original = agent._execute_child
+        def hold_executor(*args, **kwargs):
+            outcome = original(*args, **kwargs)
+            self.assertEqual(outcome['kind'], 'done')
+            self.assertIsNone(blocker.acquire())
+            return outcome
+        with patch.object(agent, 'create_response', return_value=response(call())) as request, \
+             patch.object(agent, '_execute_child', hold_executor):
+            held = self.start()
+        self.assertEqual(held.reason_code, 'executor_busy')
+        self.assertEqual(request.call_count, 1)
+        self.assertEqual(query_agent(self.store, 'demo').phase, 'tool_pending')
+        blocker.release()
+        with patch.object(agent, 'create_response', return_value={'ok': False}):
+            resumed = resume_agent(self.store, 'demo', tools(), PROVIDER)
+        self.assertEqual(resumed.reason_code, 'model_request_unknown')
+        conn = connect(self.store, write=False)
+        try:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM agent_items WHERE kind='function_call_output'").fetchone()[0], 1)
+            self.assertEqual(conn.execute("SELECT child_run_id, adopted FROM agent_calls").fetchone()[:], ('demo.p1', 1))
+        finally:
+            conn.close()
+
+    def _accept_effect(self):
+        from rewindagent.canonical import semantic_hash
+        accepted = [0]
+        def stop(boundary, point):
+            if point == 'call_accepted':
+                accepted[0] += 1
+                if accepted[0] == 2:
+                    raise SystemExit(86)
+        effect = call('record_summary', 'effect')
+        effect['arguments'] = json.dumps({'summary_ref': semantic_hash({'count': 2, 'total': 7})})
+        with patch.object(agent, 'create_response', side_effect=[response(call('summarize')), response(effect)]), \
+             patch.object(agent._Boundary, 'reach', stop):
+            with self.assertRaises(SystemExit):
+                self.start()
+
+    def test_damaged_pending_arguments_refuse_without_mutating_or_executing(self):
+        mutations = [('arguments_json', 'broken-json'), ('arguments_digest', 'wrong'),
+                     ('name', 'missing-tool'), ('child_run_id', 'unrelated.p1')]
+        for index, (column, value) in enumerate(mutations):
+            with self.subTest(column=column):
+                self.store = self.root / f'damaged-{index}.sqlite'
+                self.accept_call()
+                conn = sqlite3.connect(self.store)
+                try:
+                    conn.execute(f'UPDATE agent_calls SET {column}=?', (value,));conn.commit()
+                finally:
+                    conn.close()
+                before = self.store.read_bytes()
+                with patch.object(agent, '_execute_child') as child, patch.object(agent, 'create_response') as request:
+                    refused = resume_agent(self.store, 'demo', tools(), PROVIDER)
+                self.assertEqual(refused.reason_code, 'record_corrupt')
+                self.assertFalse(refused.published)
+                child.assert_not_called();request.assert_not_called()
+                self.assertEqual(self.store.read_bytes(), before)
+
+    def test_reconcile_checks_saved_effect_arguments_and_child_binding(self):
+        mutations = [('arguments_json', 'broken-json'), ('arguments_digest', 'wrong'),
+                     ('child_run_id', 'unrelated.effect')]
+        for index, (column, value) in enumerate(mutations):
+            with self.subTest(column=column):
+                self.store = self.root / f'reconcile-damaged-{index}.sqlite'
+                self._accept_effect()
+                conn = sqlite3.connect(self.store)
+                try:
+                    conn.execute(f"UPDATE agent_calls SET {column}=? WHERE name='record_summary'", (value,));conn.commit()
+                finally:
+                    conn.close()
+                before = self.store.read_bytes()
+                with patch.object(agent, '_execute_child') as child, patch.object(agent, 'create_response') as request:
+                    refused = agent.reconcile_agent(self.store, 'demo', tools(), PROVIDER)
+                self.assertEqual(refused.reason_code, 'record_corrupt')
+                self.assertFalse(refused.published)
+                child.assert_not_called();request.assert_not_called()
+                self.assertEqual(self.store.read_bytes(), before)
 
     def test_preexisting_child_requires_matching_input_and_workflow(self):
         # A published durable run at the derived child name is not sufficient

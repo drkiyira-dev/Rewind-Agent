@@ -286,6 +286,161 @@ class AgentRecoveryTests(unittest.TestCase):
         os.kill(holder.pid, signal.SIGKILL)
         holder.wait(timeout=5)
 
+    def _crash_transaction(self, window, meta, effect, command="start"):
+        ready = self.root / (window + "-" + command + ".json")
+        cmd = [PY, "-m", "tests.agent_transaction_worker", window, str(ready),
+               *self._cmd(command, meta, effect)[2:]]
+        crashed = self._crash(cmd, ready, window)
+        self.assertEqual(crashed["returncode"], -signal.SIGKILL)
+        self.assertEqual(crashed["stdout"], "")
+
+    def test_uncommitted_request_intent_rolls_back_without_sending(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("intent_uncommitted", meta, effect)
+        status = self._finish(self._cmd("status", meta, effect))
+        self.assertEqual(status["phase"], "awaiting_model")
+        self.assertEqual(_attempts(self.root / "agent.sqlite"), 0)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 0)
+        done = self._finish(self._cmd("resume", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+
+    def test_committed_intent_without_dispatch_still_requires_explicit_retry(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("intent_saved", meta, effect)
+        self.assertEqual(_attempts(self.root / "agent.sqlite"), 1)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 0)
+        held = self._finish(self._cmd("resume", meta, effect))
+        self.assertEqual(held["reason_code"], "model_request_unknown")
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 0)
+        self.assertEqual(_call_count(self.root / "agent.sqlite"), 0)
+        done = self._finish(self._cmd("retry-model", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(_attempts(self.root / "agent.sqlite"), 5)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+
+    def test_uncommitted_call_rolls_back_response_and_child_binding(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("call_uncommitted", meta, effect)
+        held = self._finish(self._cmd("resume", meta, effect))
+        self.assertEqual(held["reason_code"], "model_request_unknown")
+        self.assertEqual(_call_count(self.root / "agent.sqlite"), 0)
+        self.assertEqual(_items(self.root / "agent.sqlite", "model_output"), [])
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 0, "posts": 0})
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 1)
+        done = self._finish(self._cmd("retry-model", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 5)
+        conn = sqlite3.connect(self.root / "agent.sqlite")
+        try:
+            attempts = conn.execute("SELECT state, response_json FROM agent_attempts ORDER BY attempt_seq").fetchall()
+        finally:
+            conn.close()
+        self.assertEqual(attempts[0], ("may_have_sent", None))
+        self.assertEqual([r[0] for r in attempts[1:]], ["accepted"] * 4)
+
+    def test_effect_adoption_and_reconcile_adoption_roll_back_atomically(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("effect_output_uncommitted", meta, effect)
+        for command in ("reconcile", "resume"):
+            self.assertEqual(_calls(self.root / "agent.sqlite")[-1]["adopted"], 0)
+            self.assertEqual(len(_items(self.root / "agent.sqlite", "function_call_output")), 2)
+            self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+            self.assertEqual(_protocol(self.root / "proto.sqlite"), 3)
+            self._crash_transaction("effect_output_uncommitted", meta, effect, command)
+        adopted = self._finish(self._cmd("reconcile", meta, effect))
+        self.assertEqual(adopted["phase"], "awaiting_model")
+        self.assertFalse(adopted["published"])
+        self.assertEqual(len(_items(self.root / "agent.sqlite", "function_call_output")), 3)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 3)
+        done = self._finish(self._cmd("resume", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+
+    def test_hot_journal_status_stays_read_only_until_writer_recovers(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("hot_effect_output_uncommitted", meta, effect)
+        store = self.root / "agent.sqlite"
+        journal = Path(str(store) + "-journal")
+        self.assertTrue(journal.exists())
+        self.assertNotEqual(journal.read_bytes()[:8], b"\0" * 8)
+        before = (store.read_bytes(), journal.read_bytes())
+        for command in ("status", "inspect"):
+            held = self._finish(self._cmd(command, meta, effect))
+            self.assertEqual(held["reason_code"], "store_recovery_required")
+            self.assertEqual(held["status"], "unknown")
+            self.assertFalse(held["published"])
+            self.assertNotIn("items", held)
+            self.assertEqual((store.read_bytes(), journal.read_bytes()), before)
+        done = self._finish(self._cmd("resume", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertFalse(journal.exists())
+        self.assertEqual(_items(store, "rollback_padding"), [])
+        self.assertEqual(len(_items(store, "function_call_output")), 3)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+
+    def test_executor_contention_after_reconcile_defers_adoption_without_reposting(self):
+        from unittest.mock import patch
+        from rewindagent import agent
+        from rewindagent.durable import _Lock
+        from rewindagent.effectsvc import SERVICE_ID, AppendClient
+        from examples.responses_agent import tools
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("effect_output_uncommitted", meta, effect)
+        store = self.root / "agent.sqlite"
+        blocker = _Lock(Path(str(store) + ".lock"))
+        self.addCleanup(blocker.release)
+        original = agent._execute_child
+        def hold_executor(*args, **kwargs):
+            outcome = original(*args, **kwargs)
+            self.assertEqual(outcome["kind"], "done")
+            self.assertIsNone(blocker.acquire())
+            return outcome
+        provider = agent.ResponsesConfig("local_protocol_fixture", "fixture-responses-1", meta["base_url"])
+        with patch.object(agent, "_execute_child", hold_executor):
+            held = agent.reconcile_agent(store, "demo", tools(), provider,
+                                         services={SERVICE_ID: AppendClient(effect["base_url"])})
+        self.assertEqual(held.reason_code, "executor_busy")
+        self.assertEqual(_calls(store)[-1]["adopted"], 0)
+        blocker.release()
+        adopted = self._finish(self._cmd("reconcile", meta, effect))
+        self.assertEqual(adopted["phase"], "awaiting_model")
+        self.assertEqual(len(_items(store, "function_call_output")), 3)
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 3)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+        self.assertTrue(self._finish(self._cmd("resume", meta, effect))["published"])
+
+    def test_final_response_rollback_keeps_model_uncertainty_through_reconcile(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("final_uncommitted", meta, effect)
+        for command in ("reconcile", "resume"):
+            held = self._finish(self._cmd(command, meta, effect))
+            self.assertEqual(held["reason_code"], "model_request_unknown")
+            self.assertFalse(held["published"])
+            self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+            self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+        done = self._finish(self._cmd("retry-model", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 5)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+
+    def test_publication_rollback_preserves_final_for_resume(self):
+        meta, effect = self._servers(STANDARD)
+        self._crash_transaction("publication_uncommitted", meta, effect)
+        saved = self._finish(self._cmd("reconcile", meta, effect))
+        self.assertEqual(saved["phase"], "final_saved")
+        self.assertFalse(saved["published"])
+        self.assertIsNone(saved["publication_id"])
+        done = self._finish(self._cmd("resume", meta, effect))
+        again = self._finish(self._cmd("resume", meta, effect))
+        self.assertTrue(done["published"])
+        self.assertEqual(done["publication_id"], again["publication_id"])
+        self.assertEqual(_protocol(self.root / "proto.sqlite"), 4)
+        self.assertEqual(_score(self.root / "effect.sqlite"), {"effects": 1, "posts": 1})
+
     def _servers(self, fixture: Path, folder: Path | None = None) -> tuple[dict, dict]:
         folder = folder or self.root
         proto_ready = folder / "proto.ready.json"

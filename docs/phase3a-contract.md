@@ -41,3 +41,22 @@ Local fixture passage is not live model validation. `actual_provider_api_calls` 
 - CLI budget flags apply only to `start`. Resume retains stored budgets and refuses overrides. All supported budgets up to 20 turns are covered by the transition bound.
 
 The local protocol subset was checked against installed OpenAI SDK 3.46.0 and httpx2 2.16.0, and the official [Responses migration guidance](https://developers.openai.com/api/docs/guides/migrate-to-responses#additional-differences). The SDK's installed Responses parameter documentation describes encrypted reasoning continuation. These references establish protocol behavior, not experimental acceptance results.
+
+## Additional recovery boundaries
+
+The follow-up adds 12 regression tests. All provider traffic uses the local synthetic protocol. The transaction worker is test-only; no new crash hooks or schema changes are added to the runtime.
+
+| Window or fault | Checked outcome |
+| --- | --- |
+| Request intent before COMMIT | SIGKILL rolls back the attempt; resume may make the first request. |
+| Intent committed, dispatch not reached | Still unknown; only explicit retry starts another recorded attempt. |
+| Call acceptance before COMMIT | Response, call and child binding roll back together; no tool executes. Explicit retry retains the uncertain attempt. |
+| Effect-output adoption before COMMIT, including reconcile | Repeated SIGKILL leaves the existing effect intact; recovery adopts one output, with one business POST in total. |
+| Final response before COMMIT | Reconcile does not erase model uncertainty; resume does not request again without explicit retry. |
+| Publication before COMMIT | Saved final response survives; reconcile does not publish it, and resume publishes once without another request. |
+| Hot rollback journal after dirty-page spill | Read-only status/inspect return `unknown / store_recovery_required` without modifying database or journal. Locked resume rolls back and completes without another effect. |
+| Executor occupied after child completion or reconcile | Return busy before adoption; after release, the same child is adopted once. A separate file-lock descriptor exercises this contention; the existing tests also cover a competing agent process. |
+| Damaged saved arguments, unknown tool or changed child binding | Resume/reconcile reject the checked inconsistency before child execution; original database bytes remain unchanged. |
+| Retry budget exhausted with uncertain attempts | No additional SDK call or child is created. Both uncertain attempt records remain; refusal does not claim that either request never happened. |
+
+The hot-journal test uses a small SQLite cache and an uncommitted synthetic padding row to force dirty-page spill; it verifies that the padding also disappears during rollback. Other transaction tests kill immediately before COMMIT, and the existing tests kill after committed boundaries. This is process-crash evidence on the verified local filesystem, not a power-loss, fsync-failure, network-filesystem or arbitrary-disk-corruption guarantee. Saved-record checks are bounded consistency checks, not database authentication or a repair facility. Timeouts, uncertain provider billing and live model behavior remain subject to the existing local-only scope; no live behavior is inferred from fixture success.

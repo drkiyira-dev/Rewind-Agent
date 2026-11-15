@@ -1,6 +1,6 @@
 # Codex 接管说明
 
-当前状态：所有者已授权完善现有 Phase 3A，但仅限本地模拟协议，真实模型调用仍被拒绝。下列早期接管段落是历史记录；最新范围见文末 2026-11-15 Phase 3A 更新及当前清单。
+当前状态：所有者已授权完善现有 Phase 3A，但仅限本地模拟协议，真实模型调用仍被拒绝。下列早期接管段落是历史记录；最新范围见文末 Phase 3A 恢复边界更新及当前清单。
 
 本说明对应本轮有限收尾。研究结论保持 `engineering_packaging`，版本保持 0.1.0，第三阶段未开始。它不是后续扩建、发布包、部署或更改仓库设置的授权。
 
@@ -85,3 +85,9 @@ The owner workspace also contains separate, uncommitted Phase 3A work. The owner
 The owner explicitly authorized continued work on the existing Phase 3A implementation after core maintenance commit `f2ad17531ac895b136150190c42eac08e3797979`. Earlier statements that phase 3 had not begun describe those earlier handoffs. The current delivery includes the bounded local Responses fixture loop and its tests; live mode is still refused. Research conclusion: `engineering_packaging`.
 
 This continuation validates the optional SDK in an isolated environment, protects the agent-to-child lock handoff, verifies child identity before adopting results, tightens stored-record and response checks, and closes fixture resources. It adds no provider integration beyond the existing local protocol subset. Original evidence and old Phase 3A logs remain unchanged. Current results live separately under `results/phase3a-maintenance/20261115/`; the manifest records the current tested candidate.
+
+## 2026-11-15 Phase 3A recovery boundary follow-up
+
+The follow-up starts from commit `3d8bd10e22f73228c297d697f92861054cc386cd` and remains within the owner's local-only 3A authorization. The reviewed baseline passed 136 tests. The current candidate passes 148 tests (12 added), with no failures, skips or ResourceWarning; all 280 test subprocesses were reaped with closed pipes. Tests cover agent transaction rollback, a real hot SQLite journal, direct executor contention, reconcile preserving model uncertainty, and exhausted retry budgets. The [contract coverage table](phase3a-contract.md#additional-recovery-boundaries) states the exact windows and remaining limits.
+
+Two minimal runtime changes are included. Resume/reconcile validate saved call arguments and deterministic child bindings before entering the durable kernel; checked damage returns `record_corrupt` without rewriting the record. Read-only status/inspect distinguish `SQLITE_READONLY_ROLLBACK` as `unknown / store_recovery_required`; locked resume performs SQLite recovery. The pre-fix regressions and current logs are retained separately under `results/phase3a-boundaries/20261115-ypap35p2/`. There is no schema change, new provider integration, real model call or later phase. Prior evidence stays unchanged and local. The current manifest records the exact source/package hashes and clean-install checks; the final Git result is recorded after commit in the local delivery receipt.

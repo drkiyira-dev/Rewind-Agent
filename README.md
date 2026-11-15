@@ -45,7 +45,7 @@ python3 -m rewindagent eval --out "$run_dir/eval.json"
 python3 -m rewindagent round2 --out "$run_dir/round2.json"
 ```
 
-The current suite contains 136 tests. With the optional Responses dependencies installed, all 136 pass with no skips. Without them, 15 SDK integration tests are explicitly skipped; the core and dependency-free boundary tests still run. The historical handoff contained 82 tests. Tests require permission to listen on loopback. Test outputs use separate temporary directories by default. To retain them under a chosen parent directory, set `REWIND_TEST_OUTPUT`; each run still creates a fresh subdirectory. The old `PHASE2A_WRITE` and `PHASE2B_WRITE` switches that overwrote historical evidence have been removed.
+The current suite contains 148 tests. With the optional Responses dependencies installed, all 148 pass with no skips. Without them, 23 SDK integration tests are explicitly skipped; the core and dependency-free boundary tests still run. The historical handoff contained 82 tests. Tests require permission to listen on loopback. Test outputs use separate temporary directories by default. To retain them under a chosen parent directory, set `REWIND_TEST_OUTPUT`; each run still creates a fresh subdirectory. The old `PHASE2A_WRITE` and `PHASE2B_WRITE` switches that overwrote historical evidence have been removed.
 
 The owner chose to keep all seven frozen original evidence files local. They are absent from the public repository and distribution packages. A local workspace containing those originals can additionally run:
 
@@ -145,6 +145,8 @@ unset run_dir py service_pid service_url
 ## Responses tool loop
 
 This loop accepts one ordinary Responses `function_call`, stores that call, runs it through the existing pure-computation or loopback effect kernel, stores the tool result, and only then requests the next model turn. `unknown` stops the loop. `reconcile` checks an existing effect and does not call the model or send a new business POST. `status` only reads the session.
+
+Recovery also checks the saved call's arguments and child identity before executing or adopting it. Inconsistent records return `record_corrupt` without changing the evidence. If a crash leaves a SQLite rollback journal that requires writing, `status` and `inspect` return `unknown / store_recovery_required`; use `resume` to recover under the executor lock. SIGKILL tests cover uncommitted request intents, accepted calls, effect outputs, final responses and publications, including journal rollback and lock contention. See the [boundary coverage and limits](docs/phase3a-contract.md#additional-recovery-boundaries).
 
 The local fixture is synthetic. It is not a live model transcript. `store=False` selects local continuation; it is not a claim that a provider retains nothing. Live mode is implemented only as a refusal: this phase does not call a paid model.
 
